@@ -5,17 +5,18 @@ import java.util.Date;
 import java.util.UUID;
 
 public abstract class Vehicle {
-    UUID internalId;
-    int externalId;
+    protected UUID internalId;
+    protected int externalId;
     protected String name;
-    Color color;
-    Size size;
-    Producer producer;
-    double purchasePrice;
-    double salesPrice;
-    SystemOfDrive systemOfDrive;
-    Date deliveryDate;
-    StorageLocation storageLocation;
+    protected Color color;
+    protected Size size;
+    protected Producer producer;
+    protected double purchasePrice;
+    protected double salesPrice;
+    protected SystemOfDrive systemOfDrive;
+    protected Date deliveryDate;
+    protected StorageLocation storageLocation;
+    protected int numberOfWheels;
 
     public Vehicle(UUID internalId, int externalId, String name, Color color, Size size, Producer producer, double purchasePrice, double salesPrice, SystemOfDrive systemOfDrive, Date deliveryDate, StorageLocation storageLocation) {
         this.internalId = internalId;
