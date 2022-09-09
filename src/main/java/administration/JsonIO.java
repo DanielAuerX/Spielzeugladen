@@ -1,7 +1,17 @@
 package administration;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 public class JsonIO {
-/*
+
     public String readJson(String filepath) {
         String jsonString = null;
         try {
@@ -12,17 +22,13 @@ public class JsonIO {
         return jsonString;
     }
 
-    public void writeAccountData(Account account){
-        String accountFilepath = "R:\\Java\\Bankautomat\\account_data.json";
+    public void addProducer(Producer producer){
+        String accountFilepath = "R:\\Java\\Spielzeugladen\\producer_data.json";
         Gson gson = new Gson();
-        String content = readJson(accountFilepath);
-        ArrayList<Account> allAccounts = gson.fromJson(content, new TypeToken<ArrayList<Account>>() {}.getType());
-        List<Account> oldCard = allAccounts.stream().
-                filter(account1 -> account.getId() == account1.getId()).
-                toList();
-        allAccounts.remove(oldCard.get(0));
-        allAccounts.add(account);
-        String jsonText = gson.toJson(allAccounts, new TypeToken<ArrayList<Card>>() {}.getType());
+        String jsonAsString = readJson(accountFilepath);
+        ArrayList<Producer> allProducers = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Producer>>() {}.getType());
+        allProducers.add(producer);
+        String jsonText = gson.toJson(allProducers, new TypeToken<ArrayList<Producer>>() {}.getType());
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(accountFilepath));
             writer.write(jsonText);
@@ -32,5 +38,4 @@ public class JsonIO {
             e.printStackTrace();
         }
     }
- */
 }

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarTest {
 
     Address address = new Address("Steinstraße", "1a", 29664, "Bremen");
-    Producer producer = new Producer("Toys4Us", address, 0516112345, "produktion@T4US.com");
+    Producer producer = new Producer("Toys4Us", address, "0516112345", "produktion@T4US.com");
     Car car = new Car(UUID.randomUUID(),
             1,
             "Speedo",

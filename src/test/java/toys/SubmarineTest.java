@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubmarineTest {
     Address address = new Address("Hauptstraße", "1a", 29664, "Bremen");
-    Producer producer = new Producer("IKEA", address, 0516112345, "produktion@ikea.com");
+    Producer producer = new Producer("IKEA", address, "0516112345", "produktion@ikea.com");
     Submarine submarine = new Submarine(UUID.randomUUID(),
             1,
             "U-Boot1",

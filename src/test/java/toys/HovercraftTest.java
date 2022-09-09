@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HovercraftTest {
 
     Address address = new Address("Steinstraße", "1a", 29664, "Bremen");
-    Producer producer = new Producer("Toys4Us", address, 0516112345, "produktion@T4US.com");
+    Producer producer = new Producer("Toys4Us", address, "0516112345", "produktion@T4US.com");
     Hovercraft hovercraft = new Hovercraft(UUID.randomUUID(),
             1,
             "Puff-Puff-Kissenboot",

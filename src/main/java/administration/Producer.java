@@ -4,12 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Producer {
-    String name;
-    Address address;
-    int phoneNumber;
-    String email;
+    private String name;
+    private Address address;
+    private String phoneNumber;
+    private String email;
 
-    public Producer(String name, Address address, int phoneNumber, String email){
+    public Producer(String name, Address address, String phoneNumber, String email){
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -21,12 +21,14 @@ public class Producer {
 
     @Override
     public String toString() {
-        return "Producer{" +
-                "name='" + name + '\'' +
-                ", address=" + address +
-                ", phoneNumber=" + phoneNumber +
-                ", email='" + email + '\'' +
-                '}';
+        return name +
+                " (" + address +
+                "; Telefonnummer " + phoneNumber +
+                "; Email " + email + ")";
+    }
+
+    public String getName() {
+        return name;
     }
 
     private boolean validateEmail(String email){

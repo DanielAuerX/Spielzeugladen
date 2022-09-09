@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SailboatTest {
     UUID uuid = UUID.randomUUID();
     Address address = new Address("Hauptstraße", "1a", 29664, "Bremen");
-    Producer producer = new Producer("IKEA", address, 0516112345, "produktion@ikea.com");
+    Producer producer = new Producer("IKEA", address, "0516112345", "produktion@ikea.com");
     Date deliveryDate = new Date(10, Calendar.NOVEMBER, 2022);
 
     Sailboat sailboat = new Sailboat(uuid,

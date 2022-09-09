@@ -16,7 +16,6 @@ public abstract class Vehicle {
     protected SystemOfDrive systemOfDrive;
     protected Date deliveryDate;
     protected StorageLocation storageLocation;
-    protected int numberOfWheels;
 
     public Vehicle(UUID internalId, int externalId, String name, Color color, Size size, Producer producer, double purchasePrice, double salesPrice, SystemOfDrive systemOfDrive, Date deliveryDate, StorageLocation storageLocation) {
         this.internalId = internalId;
@@ -32,24 +31,94 @@ public abstract class Vehicle {
         this.storageLocation = storageLocation;
     }
 
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "externalId=" + externalId +
-                ", name='" + name + '\'' +
-                ", color=" + color +
-                ", size=" + size +
-                ", producer=" + producer +
-                ", purchasePrice=" + purchasePrice +
-                ", salesPrice=" + salesPrice +
-                ", systemOfDrive=" + systemOfDrive +
-                ", deliveryDate=" + deliveryDate +
-                ", storageLocation=" + storageLocation +
-                '}';
+    public String print() {
+        Transformer transformer = new Transformer();
+        return "Das Spielzeug hat folgende Merkmale:" +
+                "\n Artikelnummer " + externalId +
+                "\n Bezeichnung " + name  +
+                "\n Farbe " + transformer.colorToString(color) +
+                "\n Größe " + size +
+                "\n Hersteller " + producer +
+                "\n Einkaufspreis " + String.format("%.2f", purchasePrice) +"EUR"+
+                "\n Verkaufspreis " + String.format("%.2f", salesPrice) +"EUR"+
+                "\n Antriebsart " + systemOfDrive +
+                "\n Lieferdatum " + deliveryDate +
+                "\n Lagerort " + storageLocation;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public double getSalesPrice() {
+        return salesPrice;
+    }
+
+    public SystemOfDrive getSystemOfDrive() {
+        return systemOfDrive;
+    }
+
+    public Date getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public int getExternalId() {
+        return externalId;
+    }
+    public StorageLocation getStorageLocation() {
+        return storageLocation;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public void setSalesPrice(double salesPrice) {
+        this.salesPrice = salesPrice;
+    }
+
+    public void setSystemOfDrive(SystemOfDrive systemOfDrive) {
+        this.systemOfDrive = systemOfDrive;
+    }
+
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public void setStorageLocation(StorageLocation storageLocation) {
+        this.storageLocation = storageLocation;
     }
 
     protected void printMovement(String genericName, String typeOfMovement, String element){
