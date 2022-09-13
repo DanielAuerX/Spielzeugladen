@@ -1,6 +1,5 @@
 package administration;
 
-import com.sun.jdi.InterfaceType;
 import toys.*;
 
 import java.awt.*;
@@ -57,60 +56,23 @@ public class Main {
         //System.out.println(car.print());
 
         ToyAdministration toyAdministration = new ToyAdministration();
-        Vehicle testVehicle = toyAdministration.compileVehicle();
+        //Vehicle testVehicle = toyAdministration.createVehicle();
         //System.out.println(testVehicle.getClass());
-        printMovementOfVehicle(testVehicle);
+        //testVehicle.printMovementOfVehicle(testVehicle);
 
         //Repository repo = new Repository();
         //repo.printProducer();
 
+        Repository repository = new Repository();
+        repository.printVehicle();
+
+        JsonIO jsonIO = new JsonIO();
+        //jsonIO.addVehicle(testVehicle);
+
+
 
 
     }
 
-    public static void printMovementOfVehicle(Vehicle vehicle){
-        if (vehicle instanceof Jet){
-            Jet newJet = (Jet)vehicle;
-            newJet.fly();
-        }
-        else if (vehicle instanceof Glider) {
-            Glider glider = (Glider) vehicle;
-            glider.fly();
-        }
-        else if (vehicle instanceof Helicopter) {
-            Helicopter heli = (Helicopter) vehicle;
-            heli.fly();
-        }
-        else if (vehicle instanceof Car) {
-            Car car = (Car) vehicle;
-            car.drive();
-        }
-        else if (vehicle instanceof Bicycle) {
-            Bicycle bike = (Bicycle) vehicle;
-            bike.drive();
-        }
-        else if (vehicle instanceof Motorcycle) {
-            Motorcycle bike = (Motorcycle) vehicle;
-            bike.drive();
-        }
-        else if (vehicle instanceof Bulldozer) {
-            Bulldozer bulldozer = (Bulldozer) vehicle;
-            bulldozer.drive();
-        }
-        else if (vehicle instanceof Truck) {
-            Truck truck = (Truck) vehicle;
-            truck.drive();
-        }
-        else if (vehicle instanceof Hovercraft) {
-            Hovercraft hovercraft = (Hovercraft) vehicle;
-            hovercraft.drive();
-            hovercraft.swim();
-        }
-        else if (vehicle instanceof Submarine) {
-            Submarine submarine = (Submarine) vehicle;
-            submarine.dive();
-            submarine.swim();
-        }
 
-    }
 }

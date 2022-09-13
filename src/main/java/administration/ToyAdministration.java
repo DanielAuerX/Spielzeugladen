@@ -1,9 +1,6 @@
 package administration;
 
-import toys.Bicycle;
-import toys.Car;
-import toys.Jet;
-import toys.Submarine;
+import toys.*;
 
 import java.awt.*;
 import java.util.Date;
@@ -11,7 +8,7 @@ import java.util.UUID;
 
 public class ToyAdministration {
 
-    public Vehicle compileVehicle(){
+    public Vehicle createVehicle(){
         UserInterface userInterface = new UserInterface();
         Transformer transformer = new Transformer();
         Repository repository = new Repository();
@@ -30,24 +27,32 @@ public class ToyAdministration {
         int externalId = counter+1;
         UUID internalId = UUID.randomUUID();
 
-        Vehicle vehicle;
-        name = name.toLowerCase();
-        if (name.equals("jet")){
-            vehicle = new Jet(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-        } else if (name.equals("auto")) {
-            int numberOfWheels = Integer.parseInt(userInterface.askForParameter("Anzahl der Räder"));
-            vehicle = new Car(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1, numberOfWheels);
-        } else if(name.equals("u-boot") || name.equals("uboot")){
-            vehicle = new Submarine(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-        }
-        else {
-            vehicle = new Bicycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-        }
 
-        return vehicle;
+        name = name.toLowerCase();
+        switch (name) {
+            case "jet":
+                return new Jet(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
+            case "auto": {
+                int numberOfWheels = Integer.parseInt(userInterface.askForParameter("Anzahl der Räder"));
+                return new Car(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1, numberOfWheels);
+            }
+            case "u-boot":
+            case "uboot":
+                return new Submarine(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
+            case "segelboot":
+                return new Sailboat(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
+            case "luftkissenboot":
+                return new Hovercraft(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
+            case "motorboot":
+                return new Motorboat(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
+            default: {
+                int numberOfWheels = Integer.parseInt(userInterface.askForParameter("Anzahl der Räder"));
+                return new Bicycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1, numberOfWheels);
+            }
+        }
     }
 
-    public Producer compileProducer(){
+    public Producer createProducer(){
         UserInterface userInterface = new UserInterface();
         String name = userInterface.askForParameter("Name des Herstellers");
         String street = userInterface.askForParameter("Straße (Adresse)");

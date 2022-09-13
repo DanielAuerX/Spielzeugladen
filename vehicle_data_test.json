@@ -1,0 +1,59 @@
+[
+  {
+    "genericName": "ein Auto",
+    "numberOfWheels": 4,
+    "internalId": "ee5177fa-720d-4175-b64c-a49486167e66",
+    "externalId": 1,
+    "name": "auto",
+    "color": {
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 10,
+    "salesPrice": 15,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "Aug 10, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "ein Jet",
+    "internalId": "ee5177fa-720d-4175-b64c-a49486167e66",
+    "externalId": 1,
+    "name": "Jet500",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 10,
+    "salesPrice": 15,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "Aug 18, 2021, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  }
+]

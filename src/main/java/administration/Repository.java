@@ -1,16 +1,17 @@
 package administration;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 
+import adapters.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import toys.Vehicle;
 
 public class Repository {
-    private ArrayList<Producer> getProducers(){
-        //Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
+    private ArrayList<Producer> instantiateProducers(){
         Gson gson = new Gson();
         JsonIO jsonIO = new JsonIO();
         String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\producer_data.json");
@@ -18,23 +19,30 @@ public class Repository {
         return producers;
     }
 
-    private ArrayList<Vehicle> getVehicles(){
-        Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
+    private ArrayList<Vehicle> instantiateVehicles(){
+        GsonBuilder builder = new GsonBuilder();                            //Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
+        builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
+        builder.registerTypeAdapter(Color.class, new ColorAdapter());
+        Gson gson = builder.create();
         JsonIO jsonIO = new JsonIO();
-        String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\inventory_data.json");
-        ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Producer>>() {}.getType());
+        String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\vehicle_data_test.json");
+        ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
         return vehicles;
     }
 
-    public void printProducer(){
-        //System.out.println(getProducers().get(1).toString());
-        System.out.println(getVehicles().get(0).getExternalId());;
-        System.out.println(getVehicles().get(0).getColor());
-        System.out.println(getVehicles().get(0).getSize());
-        System.out.println(getVehicles().get(0).getProducer());
-        System.out.println(getVehicles().get(0).getSalesPrice());
-        System.out.println(getVehicles().get(0).getDeliveryDate());
+
+    public void printVehicle(){
+        ArrayList<Vehicle> vehicles = instantiateVehicles();
+        System.out.println(vehicles.get(0).getClass());
+        System.out.println(vehicles.get(0).print());
+        System.out.println(vehicles.get(1).getClass());
+        System.out.println(vehicles.get(1).print());
+
     }
+
+    /*
+
+
 
     private HashMap<String, Producer> getProducerHashMap (){
         ArrayList<Producer> producers = getProducers();
@@ -50,14 +58,16 @@ public class Repository {
         return producers.get(name);
     }
 
+     */
+
     public Producer getProducer(String indexAsString){
         int index = Integer.parseInt(indexAsString);
-        ArrayList<Producer> producers = getProducers();
+        ArrayList<Producer> producers = instantiateProducers();
         JsonIO jsonIO = new JsonIO();
         ToyAdministration toyAdministration = new ToyAdministration();
         Producer producer;
         if(index==0){               //customer chose to create new Producer
-            producer = toyAdministration.compileProducer();
+            producer = toyAdministration.createProducer();
             jsonIO.addProducer(producer);
         }
         else if (index > 0 && index < producers.size()+1) {
@@ -70,7 +80,7 @@ public class Repository {
     }
 
     public String getProducerNames(){
-        ArrayList<Producer> producers = getProducers();
+        ArrayList<Producer> producers = instantiateProducers();
         int counter = 1;
         String producerNames = "Hersteller:\n0\t=\tneuen Hersteller anlegen\n";
         for (Producer producer : producers) {

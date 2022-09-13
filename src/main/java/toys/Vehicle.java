@@ -1,4 +1,6 @@
-package administration;
+package toys;
+
+import administration.*;
 
 import java.awt.*;
 import java.util.Date;
@@ -123,5 +125,51 @@ public abstract class Vehicle {
 
     protected void printMovement(String genericName, String typeOfMovement, String element){
         System.out.println("Hallo ich bin "+genericName+" und ich "+typeOfMovement+element+"!");
+    }
+
+    public void printMovementOfVehicle(Vehicle vehicle){
+        if (vehicle instanceof Jet){
+            Jet newJet = (Jet)vehicle;
+            newJet.fly();
+        }
+        else if (vehicle instanceof Glider) {
+            Glider glider = (Glider) vehicle;
+            glider.fly();
+        }
+        else if (vehicle instanceof Helicopter) {
+            Helicopter heli = (Helicopter) vehicle;
+            heli.fly();
+        }
+        else if (vehicle instanceof Car) {
+            Car car = (Car) vehicle;
+            car.drive();
+        }
+        else if (vehicle instanceof Bicycle) {
+            Bicycle bike = (Bicycle) vehicle;
+            bike.drive();
+        }
+        else if (vehicle instanceof Motorcycle) {
+            Motorcycle bike = (Motorcycle) vehicle;
+            bike.drive();
+        }
+        else if (vehicle instanceof Bulldozer) {
+            Bulldozer bulldozer = (Bulldozer) vehicle;
+            bulldozer.drive();
+        }
+        else if (vehicle instanceof Truck) {
+            Truck truck = (Truck) vehicle;
+            truck.drive();
+        }
+        else if (vehicle instanceof Hovercraft) {
+            Hovercraft hovercraft = (Hovercraft) vehicle;
+            hovercraft.drive();
+            hovercraft.swim();
+        }
+        else if (vehicle instanceof Submarine) {
+            Submarine submarine = (Submarine) vehicle;
+            submarine.dive();
+            submarine.swim();
+        }
+
     }
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Car extends Vehicle implements LandVehicle {
+
     private final String genericName = "ein Auto";
     private int numberOfWheels;
 
