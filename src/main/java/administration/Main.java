@@ -56,21 +56,33 @@ public class Main {
         //System.out.println(car.print());
 
         ToyAdministration toyAdministration = new ToyAdministration();
-        //Vehicle testVehicle = toyAdministration.createVehicle();
-        //System.out.println(testVehicle.getClass());
-        //testVehicle.printMovementOfVehicle(testVehicle);
+        JsonIO jsonIO = new JsonIO();
+        Repository repository = new Repository();
+        Vehicle testVehicle = toyAdministration.createVehicle();
+        System.out.println(testVehicle.getClass());
+        System.out.println(testVehicle.print());
+        testVehicle.printMovementOfVehicle(testVehicle);
+        System.out.println(testVehicle.getSize());
+        jsonIO.addVehicle(testVehicle);
+
+
+        System.out.println(repository.getVehicleByExternalId(5).print());
+        System.out.println(repository.getVehicleByExternalId(6).print());
+
 
         //Repository repo = new Repository();
         //repo.printProducer();
 
-        Repository repository = new Repository();
-        repository.printVehicle();
 
-        JsonIO jsonIO = new JsonIO();
-        //jsonIO.addVehicle(testVehicle);
+        //repository.printVehicle();
 
 
 
+        //Vehicle vehicle = repository.getVehicleByExternalId(1);
+        //System.out.println(vehicle.print());
+
+        //Vehicle vehicleByExternalId = repository.getVehicleByExternalId(1);
+        //System.out.println(vehicleByExternalId.print());
 
     }
 

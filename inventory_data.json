@@ -1,56 +1,83 @@
 [
   {
-    "internalId" : "7646fbfd-ac20-4781-bc71-953d848f82db",
-    "externalId" : 1001,
-    "name" : "Jet",
-    "color" : {
-      "r" : 255,
-      "g" : 0,
-      "b" : 0
+    "internalId": "7646fbfd-ac20-4781-bc71-953d848f82db",
+    "externalId": 1001,
+    "name": "Jet-X",
+    "color": {
+      "r": 255,
+      "g": 0,
+      "b": 0
     },
-    "size" : "M",
-    "producer" : {
-      "name" : "Toys4Us",
-      "address" : {
-        "street" : "Muellerweg",
-        "houseNumber" : "7a",
-        "zipCode" : 13357,
-        "city" : "Berlin"
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
       },
-      "phoneNumber" : "022488248",
-      "email" : "production@t4us.de"
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
     },
-    "purchasePrice" : 10.25,
-    "salesPrice" : 15.99,
-    "systemOfDrive" : "KEROSINMOTOR",
-    "deliveryDate" : "01.08.2022",
-    "storageLocation" : "LOCATION1"
+    "purchasePrice": 10.25,
+    "salesPrice": 15.99,
+    "systemOfDrive": "KEROSINMOTOR",
+    "deliveryDate": "01.08.2022",
+    "storageLocation": "LOCATION1"
   },
   {
-    "internalId" : "736eda0d-b2fc-40c4-a044-9984a800e36e",
-    "externalId" : 1002,
-    "name" : "Hubschrauber",
-    "color" : {
-      "r" : 0,
-      "g" : 0,
-      "b" : 0
+    "internalId": "736eda0d-b2fc-40c4-a044-9984a800e36e",
+    "externalId": 1002,
+    "name": "HubHub",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
     },
-    "size" : "L",
-    "producer" : {
-      "name" : "Toys4Us",
-      "address" : {
-        "street" : "Muellerweg",
-        "houseNumber" : "7a",
-        "zipCode" : 13357,
-        "city" : "Berlin"
+    "size": "L",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
       },
-      "phoneNumber" : "022488248",
-      "email" : "production@t4us.de"
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
     },
-    "purchasePrice" : 10.25,
-    "salesPrice" : 15.99,
-    "systemOfDrive" : "KEROSINMOTOR",
-    "deliveryDate" : "01.08.2022",
-    "storageLocation" : "LOCATION1"
+    "purchasePrice": 10.25,
+    "salesPrice": 15.99,
+    "systemOfDrive": "KEROSINMOTOR",
+    "deliveryDate": "01.08.2022",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "internalId": "ee6177fa-720d-4175-b64c-a49486167e66",
+    "externalId": 1003,
+    "name": "Jet500",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 10,
+    "salesPrice": 15,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "Aug 18, 2021, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
   }
 ]

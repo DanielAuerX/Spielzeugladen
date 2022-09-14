@@ -83,6 +83,9 @@ public abstract class Vehicle {
     public int getExternalId() {
         return externalId;
     }
+
+    public UUID getInternalId() {return internalId;}
+
     public StorageLocation getStorageLocation() {
         return storageLocation;
     }

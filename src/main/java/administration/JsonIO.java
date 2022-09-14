@@ -1,6 +1,7 @@
 package administration;
 
 import adapters.ColorAdapter;
+import adapters.VehicleAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -44,17 +45,20 @@ public class JsonIO {
     }
 
     public void addVehicle(Vehicle vehicle){
-        String accountFilepath = "R:\\Java\\Spielzeugladen\\vehicle_data_test.json";
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Color.class, new ColorAdapter());
-        Gson gson = builder.create();
+        String filepath = "R:\\Java\\Spielzeugladen\\vehicle_data_test.json";
         //String jsonAsString = readJson(accountFilepath);
         //ArrayList<Vehicle> vehicles = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        GsonBuilder builder = new GsonBuilder();                            //Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
+        builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
+        builder.registerTypeAdapter(Color.class, new ColorAdapter());
+        Gson gson = builder.create();
+        String jsonString = readJson(filepath);
+        ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
+        //ArrayList<Vehicle> vehicles = new ArrayList<>();
         vehicles.add(vehicle);
         String jsonText = gson.toJson(vehicles, new TypeToken<ArrayList<Vehicle>>() {}.getType());
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(accountFilepath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
             writer.write(jsonText);
             writer.close();
         }

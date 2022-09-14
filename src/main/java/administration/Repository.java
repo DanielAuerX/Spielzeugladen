@@ -1,8 +1,7 @@
 package administration;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.*;
 
 import adapters.*;
 import com.google.gson.Gson;
@@ -19,7 +18,7 @@ public class Repository {
         return producers;
     }
 
-    private ArrayList<Vehicle> instantiateVehicles(){
+    private HashMap<UUID, Vehicle> instantiateVehicles(){
         GsonBuilder builder = new GsonBuilder();                            //Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
         builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
         builder.registerTypeAdapter(Color.class, new ColorAdapter());
@@ -27,38 +26,49 @@ public class Repository {
         JsonIO jsonIO = new JsonIO();
         String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\vehicle_data_test.json");
         ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
-        return vehicles;
-    }
-
-
-    public void printVehicle(){
-        ArrayList<Vehicle> vehicles = instantiateVehicles();
-        System.out.println(vehicles.get(0).getClass());
-        System.out.println(vehicles.get(0).print());
-        System.out.println(vehicles.get(1).getClass());
-        System.out.println(vehicles.get(1).print());
-
-    }
-
-    /*
-
-
-
-    private HashMap<String, Producer> getProducerHashMap (){
-        ArrayList<Producer> producers = getProducers();
-        HashMap<String, Producer> producersMap = new HashMap<>();
-        for (Producer producer : producers){
-            producersMap.put(producer.getName(), producer);
+        HashMap<UUID, Vehicle> vehicleHashMap = new HashMap<>();
+        for (Vehicle vehicle : vehicles){
+            vehicleHashMap.put(vehicle.getInternalId(), vehicle);
         }
-        return producersMap;
+        return vehicleHashMap;
     }
 
-    public Producer getProducerByName(String name){
-        HashMap<String , Producer> producers = getProducerHashMap();
-        return producers.get(name);
+    public void test(){
+        System.out.println(instantiateVehicles());
     }
 
-     */
+    private Vehicle getVehicleByInternalId(UUID internalId){
+        HashMap<UUID , Vehicle> vehicles = instantiateVehicles();
+        return vehicles.get(internalId);
+    }
+
+    private UUID getInternalID(int externalID){
+        HashMap<Integer, UUID> idHashMap = new HashMap<>();
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        for (UUID i: vehicleHashMap.keySet()) {
+            Integer key = vehicleHashMap.get(i).getExternalId();
+            idHashMap.put(key, i);
+        }
+        UUID internalId = idHashMap.get(externalID);
+        if (internalId == null){
+            throw new InputMismatchException("Diese Artikelnummer konnte nicht gefunden werden!");
+        }
+        return internalId;
+    }
+
+    public Vehicle getVehicleByExternalId(int externalId){
+        UUID internalID = getInternalID(externalId);
+        return getVehicleByInternalId(internalID);
+    }
+
+    public int getHighestExternalId(){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Integer> list = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            list.add(vehicleHashMap.get(i).getExternalId());
+        }
+        return Collections.max(list);
+    }
 
     public Producer getProducer(String indexAsString){
         int index = Integer.parseInt(indexAsString);

@@ -38,19 +38,20 @@ public class ColorAdapter extends TypeAdapter<Color> {
             }
 
 
-            if ("r".equals(fieldname)) {
+            assert fieldname != null;
+            if (fieldname.equals("r")) {
                 //move to next token
                 token = jsonReader.peek();
                 r = jsonReader.nextInt();
             }
 
-            if ("g".equals(fieldname)) {
+            if (fieldname.equals("g")) {
                 //move to next token
                 token = jsonReader.peek();
                 g = jsonReader.nextInt();
             }
 
-            if ("b".equals(fieldname)) {
+            if (fieldname.equals("b")) {
                 //move to next token
                 token = jsonReader.peek();
                 b = jsonReader.nextInt();

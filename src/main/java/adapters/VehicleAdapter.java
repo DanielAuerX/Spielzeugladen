@@ -8,9 +8,10 @@ import toys.*;
 import java.awt.*;
 import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.UUID;
 
-public class VehicleAdapter implements JsonDeserializer<Vehicle> {
+public class VehicleAdapter implements JsonDeserializer<Vehicle>, JsonSerializer<Vehicle> {
 
 
     @Override
@@ -30,16 +31,14 @@ public class VehicleAdapter implements JsonDeserializer<Vehicle> {
         Date deliveryDate = jsonDeserializationContext.deserialize(jsonObject.get("deliveryDate"), Date.class);
         StorageLocation storageLocation = jsonDeserializationContext.deserialize(jsonObject.get("storageLocation"), StorageLocation.class);
 
-        if (jsonObject.get("numberOfWheels") != null) {
-            if (genericName.contains("Auto")) {
-                return new Car(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());}
-            else if (genericName.contains("Motorrad")) {
-                return new Motorcycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());}
-            else if (genericName.contains("LKW")) {
-                return new Truck(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());}
-            else if (genericName.contains("Fahrrad")) {
-                return new Bicycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());}
-            else {throw new JsonParseException("No class has been found for this element!");}
+        if (genericName.contains("Auto")) {
+            return new Car(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());
+        } else if (genericName.contains("Motorrad")) {
+            return new Motorcycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());
+        } else if (genericName.contains("LKW")) {
+            return new Truck(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());
+        } else if (genericName.contains("Fahrrad")) {
+            return new Bicycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation, jsonObject.get("numberOfWheels").getAsInt());
         } else if (genericName.contains("Jet")) {
             return new Jet(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation);
         } else if (genericName.contains("Hubschrauber")) {
@@ -58,4 +57,60 @@ public class VehicleAdapter implements JsonDeserializer<Vehicle> {
             return new Bulldozer(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation);
         } else {throw new JsonParseException("No class has been found for this element!");}
     }
+
+    @Override
+    public JsonElement serialize(Vehicle vehicle, Type typeOfVehicle, JsonSerializationContext context) {
+        JsonObject result = new JsonObject();
+        result.add("genericName", new JsonPrimitive(getGenericName(vehicle)));
+        result.add("internalId", new JsonPrimitive(String.valueOf(vehicle.getInternalId())));
+        result.add("externalId", new JsonPrimitive(vehicle.getExternalId()));
+        result.add("name", new JsonPrimitive(vehicle.getName()));
+        result.add("color", context.serialize(vehicle.getColor()));
+        result.add("size", new JsonPrimitive(String.valueOf(vehicle.getSize())));
+        result.add("producer", context.serialize(vehicle.getProducer()));
+        result.add("purchasePrice", new JsonPrimitive(vehicle.getPurchasePrice()));
+        result.add("salesPrice", new JsonPrimitive(vehicle.getSalesPrice()));
+        result.add("systemOfDrive", new JsonPrimitive(String.valueOf(vehicle.getSystemOfDrive())));
+        result.add("deliveryDate", context.serialize(vehicle.getDeliveryDate()));
+        result.add("storageLocation", new JsonPrimitive(String.valueOf(vehicle.getStorageLocation())));
+        if (vehicle instanceof Car || vehicle instanceof Bicycle || vehicle instanceof Motorcycle || vehicle instanceof Truck){
+            result.add("numberOfWheels", new JsonPrimitive(getNumberOfWheels(vehicle)));
+        }
+
+        return result;
+    }
+
+    private String getGenericName(Vehicle vehicle){
+        return switch (vehicle.getClass().getSimpleName()) {
+            case "Submarine" -> "ein U-Boot";
+            case "Car" -> "ein Auto";
+            case "Bicycle" -> "ein Fahrrad";
+            case "Bulldozer" -> "ein Bulldozer";
+            case "Glider" -> "ein Segelflugzeug";
+            case "Helicopter" -> "ein Hubschrauber";
+            case "Hovercraft" -> "ein Luftkissenboot";
+            case "Jet" -> "ein Jet";
+            case "Motorboat" -> "ein Motorboot";
+            case "Motorcycle" -> "ein Motorrad";
+            case "Sailboat" -> "ein Segelboot";
+            case "Truck" -> "ein LKW";
+            default -> throw new InputMismatchException("No such class found!");
+        };
+    }
+
+    private int getNumberOfWheels(Vehicle vehicle) {
+        if (vehicle instanceof Car)
+            return ((Car) vehicle).getNumberOfWheels();
+        else if (vehicle instanceof Bicycle)
+            return ((Bicycle) vehicle).getNumberOfWheels();
+        else if (vehicle instanceof Motorcycle)
+            return ((Motorcycle) vehicle).getNumberOfWheels();
+        else if (vehicle instanceof Truck)
+            return ((Truck) vehicle).getNumberOfWheels();
+        else {
+            throw new InputMismatchException("Vehicle has no wheels or has not been found");
+        }
+    }
+
+
 }
