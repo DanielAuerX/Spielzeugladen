@@ -2,6 +2,7 @@ package toys;
 
 import administration.*;
 import interfaces.LandVehicle;
+import interfaces.WheeledVehicle;
 import toy_features.Producer;
 import toy_features.Size;
 import toy_features.StorageLocation;
@@ -11,7 +12,7 @@ import java.awt.*;
 import java.util.Date;
 import java.util.UUID;
 
-public class Car extends Vehicle implements LandVehicle {
+public class Car extends Vehicle implements LandVehicle, WheeledVehicle {
 
     private final String genericName = "Auto";
     private int numberOfWheels;
@@ -39,12 +40,19 @@ public class Car extends Vehicle implements LandVehicle {
                 String.format(format, "\n Anzahl der Räder: ")+numberOfWheels;
     }
 
+    @Override
     public int getNumberOfWheels() {
         return numberOfWheels;
+    }
+
+    @Override
+    public void setNumberOfWheels(int numberOfWheels) {
+        this.numberOfWheels = numberOfWheels;
     }
 
     @Override
     public void drive() {
         printMovement(genericName, LandVehicle.typeOfMovement, LandVehicle.element);
     }
+
 }

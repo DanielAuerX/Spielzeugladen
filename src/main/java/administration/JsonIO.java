@@ -29,14 +29,14 @@ public class JsonIO {
     }
 
     public void addProducer(Producer producer){
-        String accountFilepath = "R:\\Java\\Spielzeugladen\\producer_data.json";
+        String filepath = "R:\\Java\\Spielzeugladen\\producer_data.json";
         Gson gson = new Gson();
-        String jsonAsString = readJson(accountFilepath);
+        String jsonAsString = readJson(filepath);
         ArrayList<Producer> allProducers = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Producer>>() {}.getType());
         allProducers.add(producer);
         String jsonText = gson.toJson(allProducers, new TypeToken<ArrayList<Producer>>() {}.getType());
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(accountFilepath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
             writer.write(jsonText);
             writer.close();
         }

@@ -1,1 +1,460 @@
-[{"genericName":"ein Segelflugzeug","internalId":"f57de20b-354a-4704-bea8-7ac1d1bb877a","externalId":1001,"name":"glider100","color":{"r":255,"g":0,"b":0},"size":"M","producer":{"name":"Spielzeug-Factory","address":{"street":"Waldstraße","houseNumber":"24","zipCode":22451,"city":"Hamburg"},"phoneNumber":"015618329","email":"factory@spielzeug.de"},"purchasePrice":8.5,"salesPrice":12.99,"systemOfDrive":"GRUENE_ENERGIE","deliveryDate":"Aug 20, 2022, 12:00:00 AM","storageLocation":"LOCATION1"},{"genericName":"ein Fahrrad","internalId":"56c78b25-de6c-478b-bf8e-e4e6d5a0c712","externalId":1002,"name":"BMX-POWER","color":{"r":0,"g":255,"b":0},"size":"L","producer":{"name":"Plastic World","address":{"street":"Steinstraße","houseNumber":"110","zipCode":13359,"city":"Berlin"},"phoneNumber":"+490518288248","email":"info@plastic.com"},"purchasePrice":8.25,"salesPrice":19.99,"systemOfDrive":"GRUENE_ENERGIE","deliveryDate":"Aug 12, 2022, 12:00:00 AM","storageLocation":"LOCATION1","numberOfWheels":2},{"genericName":"ein LKW","internalId":"9c318c61-ea0e-4a17-b913-c8ebf2d152c4","externalId":1003,"name":"BrumBrum","color":{"r":0,"g":0,"b":255},"size":"XL","producer":{"name":"Plastic World","address":{"street":"Steinstraße","houseNumber":"110","zipCode":13359,"city":"Berlin"},"phoneNumber":"+490518288248","email":"info@plastic.com"},"purchasePrice":5.2,"salesPrice":9.99,"systemOfDrive":"BENZINMOTOR","deliveryDate":"Sep 20, 2021, 12:00:00 AM","storageLocation":"LOCATION1","numberOfWheels":4},{"genericName":"ein Luftkissenboot","internalId":"54164ce4-7978-4d68-b318-e3fd36fc2779","externalId":1004,"name":"PuffPuff Boot","color":{"r":255,"g":0,"b":0},"size":"M","producer":{"name":"Plastic World","address":{"street":"Steinstraße","houseNumber":"110","zipCode":13359,"city":"Berlin"},"phoneNumber":"+490518288248","email":"info@plastic.com"},"purchasePrice":8.0,"salesPrice":15.5,"systemOfDrive":"DIESELMOTOR","deliveryDate":"Aug 10, 2022, 12:00:00 AM","storageLocation":"LOCATION1"},{"genericName":"ein Motorrad","internalId":"bc840249-0d6e-4919-93f6-2330b02c43ca","externalId":1005,"name":"Kawasaki","color":{"r":0,"g":255,"b":0},"size":"L","producer":{"name":"Plastic World","address":{"street":"Steinstraße","houseNumber":"110","zipCode":13359,"city":"Berlin"},"phoneNumber":"+490518288248","email":"info@plastic.com"},"purchasePrice":5.0,"salesPrice":9.99,"systemOfDrive":"BENZINMOTOR","deliveryDate":"Aug 14, 2022, 12:00:00 AM","storageLocation":"LOCATION1","numberOfWheels":2},{"genericName":"ein Segelboot","internalId":"687d86de-7ed8-4c5c-9d89-52280591bef2","externalId":1006,"name":"Sailer-1000","color":{"r":255,"g":255,"b":255},"size":"XL","producer":{"name":"Toys4Us","address":{"street":"Muellerweg","houseNumber":"7a","zipCode":13357,"city":"Berlin"},"phoneNumber":"022488248","email":"production@t4us.de"},"purchasePrice":5.0,"salesPrice":9.99,"systemOfDrive":"GRUENE_ENERGIE","deliveryDate":"Aug 14, 2022, 12:00:00 AM","storageLocation":"LOCATION1"},{"genericName":"ein U-Boot","internalId":"55323fd4-9323-489d-bb3d-accae29d7e9f","externalId":1007,"name":"Blub-1000","color":{"r":0,"g":0,"b":255},"size":"L","producer":{"name":"Toys4Us","address":{"street":"Muellerweg","houseNumber":"7a","zipCode":13357,"city":"Berlin"},"phoneNumber":"022488248","email":"production@t4us.de"},"purchasePrice":5.0,"salesPrice":9.99,"systemOfDrive":"DIESELMOTOR","deliveryDate":"May 1, 2022, 12:00:00 AM","storageLocation":"LOCATION1"},{"genericName":"ein U-Boot","internalId":"89503489-1767-43c3-a782-ba302d65aeaf","externalId":1008,"name":"Blub-2000","color":{"r":0,"g":0,"b":0},"size":"M","producer":{"name":"Toys4Us","address":{"street":"Muellerweg","houseNumber":"7a","zipCode":13357,"city":"Berlin"},"phoneNumber":"022488248","email":"production@t4us.de"},"purchasePrice":5.0,"salesPrice":9.99,"systemOfDrive":"DIESELMOTOR","deliveryDate":"Jul 20, 2022, 12:00:00 AM","storageLocation":"LOCATION1"},{"genericName":"ein Segelboot","internalId":"6df12a33-1544-46d8-948e-c97b85398fbc","externalId":1009,"name":"NordSegler","color":{"r":0,"g":0,"b":255},"size":"L","producer":{"name":"Toys4Us","address":{"street":"Muellerweg","houseNumber":"7a","zipCode":13357,"city":"Berlin"},"phoneNumber":"022488248","email":"production@t4us.de"},"purchasePrice":6.0,"salesPrice":12.99,"systemOfDrive":"GRUENE_ENERGIE","deliveryDate":"Aug 20, 2022, 12:00:00 AM","storageLocation":"LOCATION1"},{"genericName":"ein Auto","internalId":"eba4e5b8-eefa-438f-b035-3198ea80bffd","externalId":1010,"name":"BrumBrum-5000","color":{"r":255,"g":0,"b":0},"size":"XL","producer":{"name":"Spielzeug-Factory","address":{"street":"Waldstraße","houseNumber":"24","zipCode":22451,"city":"Hamburg"},"phoneNumber":"015618329","email":"factory@spielzeug.de"},"purchasePrice":9.0,"salesPrice":10.99,"systemOfDrive":"BENZINMOTOR","deliveryDate":"Jul 12, 2022, 12:00:00 AM","storageLocation":"LOCATION1","numberOfWheels":4},{"genericName":"ein LKW","internalId":"2d85aa0c-dc06-424c-bc76-242f3af3f5fa","externalId":1011,"name":"WuumWuum-1000","color":{"r":0,"g":255,"b":0},"size":"XL","producer":{"name":"Plastic World","address":{"street":"Steinstraße","houseNumber":"110","zipCode":13359,"city":"Berlin"},"phoneNumber":"+490518288248","email":"info@plastic.com"},"purchasePrice":4.0,"salesPrice":14.99,"systemOfDrive":"DIESELMOTOR","deliveryDate":"Aug 1, 2022, 12:00:00 AM","storageLocation":"LOCATION1","numberOfWheels":10}]
+[
+  {
+    "genericName": "Segelflugzeug",
+    "internalId": "f57de20b-354a-4704-bea8-7ac1d1bb877a",
+    "externalId": 1001,
+    "name": "glider100",
+    "color": {
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Spielzeug-Factory",
+      "address": {
+        "street": "Waldstraße",
+        "houseNumber": "24",
+        "zipCode": 22451,
+        "city": "Hamburg"
+      },
+      "phoneNumber": "015618329",
+      "email": "factory@spielzeug.de"
+    },
+    "purchasePrice": 8.5,
+    "salesPrice": 12.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 20, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "Fahrrad",
+    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
+    "externalId": 1002,
+    "name": "BMX-POWER",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "L",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 8.25,
+    "salesPrice": 19.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "LKW",
+    "internalId": "9c318c61-ea0e-4a17-b913-c8ebf2d152c4",
+    "externalId": 1003,
+    "name": "BrumBrum",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 255
+    },
+    "size": "XL",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 5.2,
+    "salesPrice": 9.99,
+    "systemOfDrive": "BENZINMOTOR",
+    "deliveryDate": "Sep 20, 2021, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 4
+  },
+  {
+    "genericName": "Luftkissenboot",
+    "internalId": "54164ce4-7978-4d68-b318-e3fd36fc2779",
+    "externalId": 1004,
+    "name": "PuffPuff Boot",
+    "color": {
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 8.0,
+    "salesPrice": 15.5,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "Aug 10, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "Motorrad",
+    "internalId": "bc840249-0d6e-4919-93f6-2330b02c43ca",
+    "externalId": 1005,
+    "name": "Kawasaki",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "L",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 5.0,
+    "salesPrice": 9.99,
+    "systemOfDrive": "BENZINMOTOR",
+    "deliveryDate": "Aug 14, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "Segelboot",
+    "internalId": "687d86de-7ed8-4c5c-9d89-52280591bef2",
+    "externalId": 1006,
+    "name": "Sailer-1000",
+    "color": {
+      "r": 255,
+      "g": 255,
+      "b": 255
+    },
+    "size": "XL",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 5.0,
+    "salesPrice": 9.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 14, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "U-Boot",
+    "internalId": "55323fd4-9323-489d-bb3d-accae29d7e9f",
+    "externalId": 1007,
+    "name": "Blub-1000",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 255
+    },
+    "size": "L",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 5.0,
+    "salesPrice": 9.99,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "May 1, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "U-Boot",
+    "internalId": "89503489-1767-43c3-a782-ba302d65aeaf",
+    "externalId": 1008,
+    "name": "Blub-2000",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 5.0,
+    "salesPrice": 9.99,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "Jul 20, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "Segelboot",
+    "internalId": "6df12a33-1544-46d8-948e-c97b85398fbc",
+    "externalId": 1009,
+    "name": "NordSegler",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 255
+    },
+    "size": "L",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 6.0,
+    "salesPrice": 12.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 20, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1"
+  },
+  {
+    "genericName": "Auto",
+    "internalId": "eba4e5b8-eefa-438f-b035-3198ea80bffd",
+    "externalId": 1010,
+    "name": "BrumBrum-5000",
+    "color": {
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    "size": "XL",
+    "producer": {
+      "name": "Spielzeug-Factory",
+      "address": {
+        "street": "Waldstraße",
+        "houseNumber": "24",
+        "zipCode": 22451,
+        "city": "Hamburg"
+      },
+      "phoneNumber": "015618329",
+      "email": "factory@spielzeug.de"
+    },
+    "purchasePrice": 9.0,
+    "salesPrice": 10.99,
+    "systemOfDrive": "BENZINMOTOR",
+    "deliveryDate": "Jul 12, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 4
+  },
+  {
+    "genericName": "LKW",
+    "internalId": "2d85aa0c-dc06-424c-bc76-242f3af3f5fa",
+    "externalId": 1011,
+    "name": "WuumWuum-1000",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "XL",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 4.0,
+    "salesPrice": 14.99,
+    "systemOfDrive": "DIESELMOTOR",
+    "deliveryDate": "Aug 1, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 10
+  },
+  {
+    "genericName": "Fahrrad",
+    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
+    "externalId": 1002,
+    "name": "BMX-POWER",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 8.25,
+    "salesPrice": 19.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "Fahrrad",
+    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
+    "externalId": 1002,
+    "name": "BMX-POWER",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 8.25,
+    "salesPrice": 19.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "Fahrrad",
+    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
+    "externalId": 1002,
+    "name": "BMX-POWER",
+    "color": {
+      "r": 255,
+      "g": 255,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 8.25,
+    "salesPrice": 19.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "Fahrrad",
+    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
+    "externalId": 1002,
+    "name": "BMX-POWER",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 8.25,
+    "salesPrice": 19.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "LKW",
+    "internalId": "9c318c61-ea0e-4a17-b913-c8ebf2d152c4",
+    "externalId": 1003,
+    "name": "BrumBrum",
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 255
+    },
+    "size": "L",
+    "producer": {
+      "name": "Plastic World",
+      "address": {
+        "street": "Steinstraße",
+        "houseNumber": "110",
+        "zipCode": 13359,
+        "city": "Berlin"
+      },
+      "phoneNumber": "+490518288248",
+      "email": "info@plastic.com"
+    },
+    "purchasePrice": 5.2,
+    "salesPrice": 9.99,
+    "systemOfDrive": "BENZINMOTOR",
+    "deliveryDate": "Sep 20, 2021, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 4
+  }
+]

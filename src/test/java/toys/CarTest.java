@@ -29,13 +29,24 @@ class CarTest {
             4);
 
     @Test
-    void testToString_ShouldContainNumberOfWheels() {
-        String expected = "Car{externalId=1, name='Speedo', color=java.awt.Color[r=0,g=0,b=0], size=M, producer=Producer{name='Toys4Us', address=Address{street='Steinstraße', houseNumber='1a', zipCode=29664, city='Bremen'}, phoneNumber=87594213, email='produktion@T4US.com'}, purchasePrice=10.0, salesPrice=15.0, systemOfDrive=ELEKTROMOTOR, deliveryDate=Sun May 14 00:00:00 CEST 1916, storageLocation=LOCATION1, numberOfWheels=4}";
+    void print_ShouldContainNumberOfWheels() {
+        String expected = "Das Spielzeug hat folgende Merkmale\n" +
+                " Artikelnummer:    1\n" +
+                " Bezeichnung:      Speedo\n" +
+                " Farbe:            schwarz\n" +
+                " Größe:            M\n" +
+                " Hersteller:       Toys4Us (Steinstraße 1a, 29664 Bremen; Telefonnummer 0516112345; Email produktion@T4US.com)\n" +
+                " Einkaufspreis:    10,00 EUR\n" +
+                " Verkaufspreis:    15,00 EUR\n" +
+                " Antriebsart:      ELEKTROMOTOR\n" +
+                " Lieferdatum:      14.05.1916\n" +
+                " Lagerort:         LOCATION1\n" +
+                " Anzahl der Räder: 4";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
         System.setOut(printStream);
 
-        System.out.println(car);
+        System.out.println(car.print());
 
         String[] lines = outputStream.toString().split(System.lineSeparator());
         String actual = lines[lines.length-1];
@@ -44,7 +55,7 @@ class CarTest {
     }
 
     @Test
-    void drive() {
+    void drive_ShouldPrintExpectedText() {
         String expected = "Hallo ich bin ein Auto und ich fahre auf dem Untergrund!";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
@@ -56,10 +67,5 @@ class CarTest {
         String actual = lines[lines.length-1];
 
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void car_ShouldHaveWheels(){
-        assertEquals(4, car.getNumberOfWheels());
     }
 }

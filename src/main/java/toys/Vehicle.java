@@ -1,6 +1,10 @@
 package toys;
 
 import administration.*;
+import interfaces.AirVehicle;
+import interfaces.LandVehicle;
+import interfaces.SubseaVehicle;
+import interfaces.WaterVehicle;
 import toy_features.Producer;
 import toy_features.Size;
 import toy_features.StorageLocation;
@@ -42,12 +46,12 @@ public abstract class Vehicle {
         String format = "%-20s";
         return "Das Spielzeug hat folgende Merkmale" +  //in hashmap??
                 String.format(format, "\n Artikelnummer: ") + externalId +
-                String.format(format, "\n Bezeichnung: ") + name  +
+                String.format(format, "\n Bezeichnung: ") + name +
                 String.format(format, "\n Farbe: ") + transformer.colorToString(color) +
-                String.format(format, "\n Größe: ") +  size +
+                String.format(format, "\n Größe: ") + size +
                 String.format(format, "\n Hersteller: ") + producer +
-                String.format(format, "\n Einkaufspreis: ") + String.format("%.2f", purchasePrice) +" EUR"+
-                String.format(format, "\n Verkaufspreis: ") + String.format("%.2f", salesPrice) +" EUR"+
+                String.format(format, "\n Einkaufspreis: ") + String.format("%.2f", purchasePrice) + " EUR" +
+                String.format(format, "\n Verkaufspreis: ") + String.format("%.2f", salesPrice) + " EUR" +
                 String.format(format, "\n Antriebsart: ") + systemOfDrive +
                 String.format(format, "\n Lieferdatum: ") + transformer.dateToString(deliveryDate) +
                 String.format(format, "\n Lagerort: ") + storageLocation;
@@ -89,7 +93,9 @@ public abstract class Vehicle {
         return externalId;
     }
 
-    public UUID getInternalId() {return internalId;}
+    public UUID getInternalId() {
+        return internalId;
+    }
 
     public StorageLocation getStorageLocation() {
         return storageLocation;
@@ -131,53 +137,19 @@ public abstract class Vehicle {
         this.storageLocation = storageLocation;
     }
 
-    protected void printMovement(String genericName, String typeOfMovement, String element){
-        System.out.println("Hallo ich bin ein "+genericName+" und ich "+typeOfMovement+element+"!");
+    protected void printMovement(String genericName, String typeOfMovement, String element) {
+        System.out.println("Hallo ich bin ein " + genericName + " und ich " + typeOfMovement + element + "!");
     }
 
-    public void printMovementOfVehicle(Vehicle vehicle){
-        if (vehicle instanceof Jet){
-            Jet newJet = (Jet)vehicle;
-            newJet.fly();
+    public void printMovementOfVehicle(Vehicle vehicle) {
+        if (vehicle instanceof AirVehicle) {
+            ((AirVehicle) vehicle).fly();
+        } else if (vehicle instanceof LandVehicle) {
+            ((LandVehicle) vehicle).drive();
+        } else if (vehicle instanceof WaterVehicle) {
+            ((WaterVehicle) vehicle).swim();
+        } else if (vehicle instanceof SubseaVehicle) {
+            ((SubseaVehicle) vehicle).dive();
         }
-        else if (vehicle instanceof Glider) {
-            Glider glider = (Glider) vehicle;
-            glider.fly();
-        }
-        else if (vehicle instanceof Helicopter) {
-            Helicopter heli = (Helicopter) vehicle;
-            heli.fly();
-        }
-        else if (vehicle instanceof Car) {
-            Car car = (Car) vehicle;
-            car.drive();
-        }
-        else if (vehicle instanceof Bicycle) {
-            Bicycle bike = (Bicycle) vehicle;
-            bike.drive();
-        }
-        else if (vehicle instanceof Motorcycle) {
-            Motorcycle bike = (Motorcycle) vehicle;
-            bike.drive();
-        }
-        else if (vehicle instanceof Bulldozer) {
-            Bulldozer bulldozer = (Bulldozer) vehicle;
-            bulldozer.drive();
-        }
-        else if (vehicle instanceof Truck) {
-            Truck truck = (Truck) vehicle;
-            truck.drive();
-        }
-        else if (vehicle instanceof Hovercraft) {
-            Hovercraft hovercraft = (Hovercraft) vehicle;
-            hovercraft.drive();
-            hovercraft.swim();
-        }
-        else if (vehicle instanceof Submarine) {
-            Submarine submarine = (Submarine) vehicle;
-            submarine.dive();
-            submarine.swim();
-        }
-
     }
 }

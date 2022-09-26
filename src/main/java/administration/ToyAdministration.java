@@ -1,5 +1,7 @@
 package administration;
 
+import interfaces.LandVehicle;
+import interfaces.WheeledVehicle;
 import toy_features.*;
 import toys.*;
 
@@ -11,22 +13,30 @@ public class ToyAdministration {
     UserInterface userInterface = new UserInterface();
     Transformer transformer = new Transformer();
     JsonIO jsonIO = new JsonIO();
+    public static final String BOLD = "\u001B[1m";
+    public static final String RESET = "\033[0m";
 
     public void add(){
         Vehicle vehicle = createVehicle();
         jsonIO.writeVehicleData(vehicle, false);
     }
 
+    public void edit() {
+        Vehicle editedVehicle = editVehicle();
+        jsonIO.writeVehicleData(editedVehicle, false);
+    }
+
+
     private Vehicle createVehicle() {
         System.out.println("Bitte alle geforderten Informationen eingeben.");
-        int type = getTypeChoice();
+        int type = getTypeNumberFromUser();
         String name = checkName(userInterface.askForInput("Modellname"));
         Color color = transformer.stringToColor(userInterface.askForInput("Farbe"));
         Size size = transformer.stringToSize(userInterface.askForInput("Größe (M, L oder XL)"));
-        Producer producer = getProducer();
+        Producer producer = getProducerFromUser();
         double purchasePrice = Double.parseDouble(userInterface.askForInput("Einkaufspreis").replace(",", "."));
         double salesPrice = Double.parseDouble(userInterface.askForInput("Verkaufspreis").replace(",", "."));
-        SystemOfDrive systemOfDrive = getSystemOfDrive();
+        SystemOfDrive systemOfDrive = getSystemOfDriveFromUser();
         Date deliveryDate = transformer.stringToDate(userInterface.askForInput("Lieferdatum (dd.mm.yyyy)"));
         int numberOfWheels = 0;
         if (type > 5 && type < 10) {
@@ -85,14 +95,14 @@ public class ToyAdministration {
         return nameOfNewVehicle;
     }
 
-    private int getTypeChoice() {
+    private int getTypeNumberFromUser() {
         ArrayList<String> types = new  ArrayList<>(Arrays.asList("Segelboot", "Motorboot", "U-Boot", "Luftkissenboot", "Bulldozer", "Motorrad", "Auto", "LKW", "Fahrrad", "Hubschrauber", "Jet", "Segelflugzeug"));
         String table = transformer.listToMenuTable(types);
         String choiceAsString = userInterface.askForInput("Art des Spielzeugs\n" + table);
         return transformer.stringToInteger(choiceAsString);
     }
 
-    private Producer getProducer(){
+    private Producer getProducerFromUser(){
         String outputText = "Hersteller:\n0\t=\tneuen Hersteller anlegen\n"+ transformer.listToMenuTable(repository.getProducerNames());
         String choiceAsString = userInterface.askForInput(outputText);
         int choiceOfProducer = transformer.stringToInteger(choiceAsString);
@@ -104,7 +114,7 @@ public class ToyAdministration {
         return repository.getProducer((choiceOfProducer));
     }
 
-    private SystemOfDrive getSystemOfDrive(){
+    private SystemOfDrive getSystemOfDriveFromUser(){
         ArrayList<String> systems = new  ArrayList<>(Arrays.asList("Dieselmotor", "Benzinmotor", "Elektromotor", "Kerosinmotor", "Grüne Energie"));
         String choice = userInterface.askForInput("Antriebsart\n" + transformer.listToMenuTable(systems));
         return transformer.stringToSystemOfDrive(choice);
@@ -212,25 +222,66 @@ public class ToyAdministration {
         Vehicle vehicle = findByExternalId(searchText);
         jsonIO.writeVehicleData(vehicle, true);
     }
-/*
-    public Vehicle edit() {
-        String searchText = """
-                Welchen Artikel möchten Sie bearbeiten?
-                Bitte geben Sie die Artikelnummer ein""";
+
+
+    private void editFeature(Vehicle vehicle, int featureNumber) {
+        switch (featureNumber) {
+            case 1 -> {
+                String newName = userInterface.askForInput("Modellname");
+                vehicle.setName(newName);
+            }
+            case 2 -> {
+                String newColor = userInterface.askForInput("Farbe");
+                vehicle.setColor(transformer.stringToColor(newColor));
+            }
+            case 3 -> {
+                String newSize = userInterface.askForInput("Größe (M, L oder XL)");
+                vehicle.setSize(transformer.stringToSize(newSize));
+            }
+            case 4 -> {
+                Producer newProducer = getProducerFromUser();
+                vehicle.setProducer(newProducer);
+            }
+            case 5 -> {
+                String newPrice = userInterface.askForInput("Einkaufspreis)");
+                vehicle.setPurchasePrice(Double.parseDouble(newPrice));
+            }
+            case 6 -> {
+                String newPrice = userInterface.askForInput("Verkaufspreis)");
+                vehicle.setSalesPrice(Double.parseDouble(newPrice));
+            }
+            case 7 -> vehicle.setSystemOfDrive(getSystemOfDriveFromUser());
+            case 8 -> {
+                Date deliveryDate = transformer.stringToDate(userInterface.askForInput("Lieferdatum (dd.mm.yyyy)"));
+                vehicle.setDeliveryDate(deliveryDate);
+            }
+            case 9 -> {
+                if (vehicle instanceof WheeledVehicle) {
+                    int numberOfWheels = Integer.parseInt(userInterface.askForInput("Anzahl der Räder"));
+                    ((WheeledVehicle) vehicle).setNumberOfWheels(numberOfWheels);
+                } else {
+                    throw new InputMismatchException("Falsche Eingabe!");
+                }
+            }
+            default -> throw new InputMismatchException("Falsche Eingabe!");
+        }
+    }
+
+    private Vehicle editVehicle() {
+        String searchText = BOLD + "Welchen Artikel möchten Sie bearbeiten?\n" + RESET + "Bitte geben Sie die Artikelnummer ein";
         Vehicle vehicle = findByExternalId(searchText);
-        ArrayList<String> options = new ArrayList<>(Arrays.asList("Spielzeugtyp", "Modellname", "Farbe", "Größe", "Hersteller", "Einkaufspreis", "Verkaufspreis", "Antriebsart", "Lieferdatum", "Anzahl der Räder"));
-        String header = vehicle.print() + "\nWas möchten Sie bearbeiten?";
-        String choiceAsString = userInterface.askForParameter(header + transformer.listToMenuTable(options));
-        transformer.stringToInteger(choiceAsString);
-        //return edited vehicle
-        return null;
+        ArrayList<String> options = new ArrayList<>(Arrays.asList("Modellname", "Farbe", "Größe", "Hersteller", "Einkaufspreis", "Verkaufspreis", "Antriebsart", "Lieferdatum"));
+        if (vehicle instanceof WheeledVehicle) {
+            options.add("Anzahl der Räder");
+        }
+        String header = vehicle.print() + BOLD + "\nWas möchten Sie bearbeiten?\n" + RESET;
+        String featureNumberAsString = userInterface.askForInput(header + transformer.listToMenuTable(options));
+        int featureNumber = transformer.stringToInteger(featureNumberAsString);
+        editFeature(vehicle, featureNumber);
+        return vehicle;
     }
 
-    private Vehicle editVehicle(){
-        return null;
-    }
 
- */
 
 
 }

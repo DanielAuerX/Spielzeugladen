@@ -2,6 +2,7 @@
 package adapters;
 
 import com.google.gson.*;
+import interfaces.WheeledVehicle;
 import toy_features.Producer;
 import toy_features.Size;
 import toy_features.StorageLocation;
@@ -78,43 +79,27 @@ public class VehicleAdapter implements JsonDeserializer<Vehicle>, JsonSerializer
         result.add("systemOfDrive", new JsonPrimitive(String.valueOf(vehicle.getSystemOfDrive())));
         result.add("deliveryDate", context.serialize(vehicle.getDeliveryDate()));
         result.add("storageLocation", new JsonPrimitive(String.valueOf(vehicle.getStorageLocation())));
-        if (vehicle instanceof Car || vehicle instanceof Bicycle || vehicle instanceof Motorcycle || vehicle instanceof Truck) {
-            result.add("numberOfWheels", new JsonPrimitive(getNumberOfWheels(vehicle)));
+        if (vehicle instanceof WheeledVehicle) {
+            result.add("numberOfWheels", new JsonPrimitive(((WheeledVehicle) vehicle).getNumberOfWheels()));
         }
         return result;
     }
 
     private String getGenericName(Vehicle vehicle) {
         return switch (vehicle.getClass().getSimpleName()) {
-            case "Submarine" -> "ein U-Boot";
-            case "Car" -> "ein Auto";
-            case "Bicycle" -> "ein Fahrrad";
-            case "Bulldozer" -> "ein Bulldozer";
-            case "Glider" -> "ein Segelflugzeug";
-            case "Helicopter" -> "ein Hubschrauber";
-            case "Hovercraft" -> "ein Luftkissenboot";
-            case "Jet" -> "ein Jet";
-            case "Motorboat" -> "ein Motorboot";
-            case "Motorcycle" -> "ein Motorrad";
-            case "Sailboat" -> "ein Segelboot";
-            case "Truck" -> "ein LKW";
+            case "Submarine" -> "U-Boot";
+            case "Car" -> "Auto";
+            case "Bicycle" -> "Fahrrad";
+            case "Bulldozer" -> "Bulldozer";
+            case "Glider" -> "Segelflugzeug";
+            case "Helicopter" -> "Hubschrauber";
+            case "Hovercraft" -> "Luftkissenboot";
+            case "Jet" -> "Jet";
+            case "Motorboat" -> "Motorboot";
+            case "Motorcycle" -> "Motorrad";
+            case "Sailboat" -> "Segelboot";
+            case "Truck" -> "LKW";
             default -> throw new InputMismatchException("No such class found!");
         };
     }
-
-    private int getNumberOfWheels(Vehicle vehicle) {
-        if (vehicle instanceof Car)
-            return ((Car) vehicle).getNumberOfWheels();
-        else if (vehicle instanceof Bicycle)
-            return ((Bicycle) vehicle).getNumberOfWheels();
-        else if (vehicle instanceof Motorcycle)
-            return ((Motorcycle) vehicle).getNumberOfWheels();
-        else if (vehicle instanceof Truck)
-            return ((Truck) vehicle).getNumberOfWheels();
-        else {
-            throw new InputMismatchException("Vehicle has no wheels or has not been found");
-        }
-    }
-
-
 }
