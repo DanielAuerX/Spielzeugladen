@@ -1,5 +1,6 @@
 package administration;
 
+import toy_features.*;
 import toys.*;
 
 import java.awt.*;
@@ -58,16 +59,20 @@ public class Main {
         ToyAdministration toyAdministration = new ToyAdministration();
         JsonIO jsonIO = new JsonIO();
         Repository repository = new Repository();
-        Vehicle testVehicle = toyAdministration.createVehicle();
-        System.out.println(testVehicle.getClass());
-        System.out.println(testVehicle.print());
-        testVehicle.printMovementOfVehicle(testVehicle);
-        System.out.println(testVehicle.getSize());
-        jsonIO.addVehicle(testVehicle);
+        Transformer transformer = new Transformer();
+//        Vehicle testVehicle = toyAdministration.createVehicle();
+//        System.out.println(testVehicle.getClass());
+//        System.out.println(testVehicle.print());
+//        testVehicle.printMovementOfVehicle(testVehicle);
+//        System.out.println(testVehicle.getSize());
+//        jsonIO.addVehicle(testVehicle);
 
 
-        System.out.println(repository.getVehicleByExternalId(5).print());
-        System.out.println(repository.getVehicleByExternalId(6).print());
+//        Vehicle vehicleByExternalId = repository.getVehicleByExternalId(1002);
+//        System.out.println(vehicleByExternalId.print());
+
+        UserInterface userInterface = new UserInterface();
+        userInterface.run();
 
 
         //Repository repo = new Repository();

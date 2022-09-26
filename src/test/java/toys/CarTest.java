@@ -1,8 +1,7 @@
 package toys;
 
-import administration.*;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import toy_features.*;
 
 import java.awt.*;
 import java.io.ByteArrayOutputStream;

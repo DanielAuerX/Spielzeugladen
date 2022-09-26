@@ -1,4 +1,4 @@
-package administration;
+package toy_features;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

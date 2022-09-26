@@ -5,6 +5,7 @@ import adapters.VehicleAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import toy_features.Producer;
 import toys.Vehicle;
 
 import java.awt.*;
@@ -44,18 +45,20 @@ public class JsonIO {
         }
     }
 
-    public void addVehicle(Vehicle vehicle){
-        String filepath = "R:\\Java\\Spielzeugladen\\vehicle_data_test.json";
-        //String jsonAsString = readJson(accountFilepath);
-        //ArrayList<Vehicle> vehicles = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
+    public void writeVehicleData(Vehicle vehicle, boolean shouldDelete){
+        String filepath = "R:\\Java\\Spielzeugladen\\inventory_data.json";
         GsonBuilder builder = new GsonBuilder();                            //Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
         builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
         builder.registerTypeAdapter(Color.class, new ColorAdapter());
         Gson gson = builder.create();
         String jsonString = readJson(filepath);
         ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
-        //ArrayList<Vehicle> vehicles = new ArrayList<>();
-        vehicles.add(vehicle);
+        if (shouldDelete){
+            vehicles.removeIf(i -> i.getInternalId().equals(vehicle.getInternalId()));
+        }
+        else {
+            vehicles.add(vehicle);
+        }
         String jsonText = gson.toJson(vehicles, new TypeToken<ArrayList<Vehicle>>() {}.getType());
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));

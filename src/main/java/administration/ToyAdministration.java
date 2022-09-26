@@ -1,34 +1,36 @@
 package administration;
 
+import toy_features.*;
 import toys.*;
 
 import java.awt.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.UUID;
+import java.util.*;
 
 public class ToyAdministration {
+    Repository repository = new Repository();
+    UserInterface userInterface = new UserInterface();
+    Transformer transformer = new Transformer();
+    JsonIO jsonIO = new JsonIO();
 
-    public Vehicle createVehicle() {
-        UserInterface userInterface = new UserInterface();
-        Transformer transformer = new Transformer();
-        Repository repository = new Repository();
+    public void add(){
+        Vehicle vehicle = createVehicle();
+        jsonIO.writeVehicleData(vehicle, false);
+    }
 
+    private Vehicle createVehicle() {
         System.out.println("Bitte alle geforderten Informationen eingeben.");
-        int type = Integer.parseInt(userInterface.askForParameter(getVehicleTypes()));
-        String name = userInterface.askForParameter("Name");
-        Color color = transformer.stringToColor(userInterface.askForParameter("Farbe"));
-        Size size = transformer.stringToSize(userInterface.askForParameter("Größe (M, L oder XL)"));
-        Producer producer = repository.getProducer((userInterface.askForParameter(repository.getProducerNames())));
-        double purchasePrice = Double.parseDouble(userInterface.askForParameter("Einkaufspreis").replace(",", "."));
-        double salesPrice = Double.parseDouble(userInterface.askForParameter("Verkaufspreis").replace(",", "."));
-        SystemOfDrive systemOfDrive = transformer.stringToSystemOfDrive(userInterface.askForParameter("Antriebsart\n1\t=\tDieselmotor\n2\t=\tBenzinmotor\n3\t=\tElektromotor\n4\t=\tKerosinmotor\n5\t=\tGrüne Energie\nBitte den entsprechende Zahl angeben"));
-        Date deliveryDate = transformer.stringToDate(userInterface.askForParameter("Lieferdatum (dd.mm.yyyy)"));
+        int type = getTypeChoice();
+        String name = checkName(userInterface.askForInput("Modellname"));
+        Color color = transformer.stringToColor(userInterface.askForInput("Farbe"));
+        Size size = transformer.stringToSize(userInterface.askForInput("Größe (M, L oder XL)"));
+        Producer producer = getProducer();
+        double purchasePrice = Double.parseDouble(userInterface.askForInput("Einkaufspreis").replace(",", "."));
+        double salesPrice = Double.parseDouble(userInterface.askForInput("Verkaufspreis").replace(",", "."));
+        SystemOfDrive systemOfDrive = getSystemOfDrive();
+        Date deliveryDate = transformer.stringToDate(userInterface.askForInput("Lieferdatum (dd.mm.yyyy)"));
         int numberOfWheels = 0;
         if (type > 5 && type < 10) {
-            numberOfWheels = Integer.parseInt(userInterface.askForParameter("Anzahl der Räder"));
+            numberOfWheels = Integer.parseInt(userInterface.askForInput("Anzahl der Räder"));
         }
         int externalId = repository.getHighestExternalId() + 1;
         UUID internalId = UUID.randomUUID();
@@ -60,69 +62,175 @@ public class ToyAdministration {
                     new Glider(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
             default -> throw new InputMismatchException("Falsche Eingabe!");
         };
-
-        /*Object instance;
-        try {
-            Constructor<?> constructor = Class.forName("toys." + "Jet").getConstructor(UUID.class, Integer.class, String.class, Color.class, Size.class, Producer.class, Double.class, Double.class, SystemOfDrive.class, Date.class, StorageLocation.class);
-            instance = constructor.newInstance(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
-        return instance;
-
-         */
-        /*
-        name = name.toLowerCase();
-        switch (name) {
-            case "jet":
-                return new Jet(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-            case "auto": {
-                int numberOfWheels = Integer.parseInt(userInterface.askForParameter("Anzahl der Räder"));
-                return new Car(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1, numberOfWheels);
-            }
-            case "u-boot":
-            case "uboot":
-                return new Submarine(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-            case "segelboot":
-                return new Sailboat(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-            case "luftkissenboot":
-                return new Hovercraft(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-            case "motorboot":
-                return new Motorboat(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1);
-            default: {
-                int numberOfWheels = Integer.parseInt(userInterface.askForParameter("Anzahl der Räder"));
-                return new Bicycle(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, StorageLocation.LOCATION1, numberOfWheels);
-            }
-        }
-
-         */
     }
 
-    private String getVehicleTypes() {
-        String[] types = new String[]{"Segelboot", "Motorboot", "U-Boot", "Luftkissenboot", "Bulldozer", "Motorrad", "Auto", "LKW", "Fahrrad", "Hubschrauber", "Jet", "Segelflugzeug"};
-        int counter = 1;
-        StringBuilder returnText = new StringBuilder("Art des Spielzeugs\n");
-        for (String type : types) {
-            returnText.append(counter).append("\t=\t").append(type).append("\n");
-            counter++;
+    private String checkName(String nameOfNewVehicle) {
+        boolean nameDoesExist = true;
+        while (nameDoesExist){
+            try {
+                repository.getVehicleByName(nameOfNewVehicle);
+            } catch (InputMismatchException ime) {
+                return nameOfNewVehicle;
+            }
+            String outputText = """
+                    Dieser Modellname existiert bereits!
+                    Möchten Sie den Namen ändern (j = ja / n = nein)""";
+            String input = userInterface.askForInput(outputText);
+            switch (input) {
+                case "j" -> nameOfNewVehicle = userInterface.askForInput("Bitte den neuen Namen eingeben");
+                case "n" -> nameDoesExist = false;
+                default -> throw new InputMismatchException("Falsche Eingabe! Bitte 'j' oder 'n' eingeben.");
+            }
         }
-        returnText.append("Bitte die entsprechende Zahl eingeben");
-        return returnText.toString();
+        return nameOfNewVehicle;
     }
 
-    public Producer createProducer(){
+    private int getTypeChoice() {
+        ArrayList<String> types = new  ArrayList<>(Arrays.asList("Segelboot", "Motorboot", "U-Boot", "Luftkissenboot", "Bulldozer", "Motorrad", "Auto", "LKW", "Fahrrad", "Hubschrauber", "Jet", "Segelflugzeug"));
+        String table = transformer.listToMenuTable(types);
+        String choiceAsString = userInterface.askForInput("Art des Spielzeugs\n" + table);
+        return transformer.stringToInteger(choiceAsString);
+    }
+
+    private Producer getProducer(){
+        String outputText = "Hersteller:\n0\t=\tneuen Hersteller anlegen\n"+ transformer.listToMenuTable(repository.getProducerNames());
+        String choiceAsString = userInterface.askForInput(outputText);
+        int choiceOfProducer = transformer.stringToInteger(choiceAsString);
+        if (choiceOfProducer == 0){
+            Producer producer = createProducer();
+            jsonIO.addProducer(producer);
+            return producer;
+        }
+        return repository.getProducer((choiceOfProducer));
+    }
+
+    private SystemOfDrive getSystemOfDrive(){
+        ArrayList<String> systems = new  ArrayList<>(Arrays.asList("Dieselmotor", "Benzinmotor", "Elektromotor", "Kerosinmotor", "Grüne Energie"));
+        String choice = userInterface.askForInput("Antriebsart\n" + transformer.listToMenuTable(systems));
+        return transformer.stringToSystemOfDrive(choice);
+    }
+
+    private Producer createProducer(){
         UserInterface userInterface = new UserInterface();
-        String name = userInterface.askForParameter("Name des Herstellers");
-        String street = userInterface.askForParameter("Straße (Adresse)");
-        String houseNumber = userInterface.askForParameter("Hausnummer (Adresse)");
-        int zipCode = Integer.parseInt(userInterface.askForParameter("Postleitzahl (Adresse)"));
-        String city = userInterface.askForParameter("Stadt (Adresse)");
-        String telephoneNumber = userInterface.askForParameter("Telefonnummer");
-        String email = userInterface.askForParameter("Email");
+        String name = userInterface.askForInput("Name des Herstellers");
+        String street = userInterface.askForInput("Straße (Adresse)");
+        String houseNumber = userInterface.askForInput("Hausnummer (Adresse)");
+        int zipCode = Integer.parseInt(userInterface.askForInput("Postleitzahl (Adresse)"));
+        String city = userInterface.askForInput("Stadt (Adresse)");
+        String telephoneNumber = userInterface.askForInput("Telefonnummer");
+        String email = userInterface.askForInput("Email");
 
         Address address = new Address(street, houseNumber, zipCode, city);
-        Producer producer = new Producer(name, address, telephoneNumber, email);
-        return producer;
+        return new Producer(name, address, telephoneNumber, email);
     }
+
+    public String find(){
+        String header = "Wählen sie eine Kategorie nach der Sie suchen möchten.\n";
+        ArrayList<String> menuOptions = new ArrayList<>(Arrays.asList("Artikelnummer", "Spielzeugtyp", "Modellname", "Farbe", "Größe", "Hersteller", "Antriebsart"));
+        String input = userInterface.askForInput(header + transformer.listToMenuTable(menuOptions));
+        int categoryChoice = transformer.stringToInteger(input, menuOptions.size());;
+        return startSearch(categoryChoice);
+    }
+
+    private String startSearch(int categoryChoice){
+        Vehicle vehicle;
+        switch (categoryChoice){
+            case 1 : //externalId
+                vehicle = findByExternalId("Bitte Artikelnummer eingeben");
+                return vehicle.print();
+            case 2 : //toy type
+                return transformer.listToResultTable(findByClass());
+            case 3 : //name
+                vehicle = findByName();
+                return vehicle.print();
+            case 4 : //color
+                return transformer.listToResultTable(findByColor());
+            case 5 : //size
+                return transformer.listToResultTable(findBySize());
+            case 6 : //producer
+                return transformer.listToResultTable(findByProducer());
+            case 7 : //systemOfDrive
+                return transformer.listToResultTable(findBySystemOfDrive());
+            default:
+                throw new InputMismatchException("Falsche Eingabe!");
+        }
+    }
+
+    private Vehicle findByExternalId(String searchText) {
+        String externalIdAsString = userInterface.askForInput(searchText);
+        int externalId = transformer.stringToInteger(externalIdAsString);
+        return repository.getVehicleByExternalId(externalId);
+    }
+
+    private Vehicle findByName(){
+        String name = userInterface.askForInput("Bitte Modellname eingeben");
+        return repository.getVehicleByName(name);
+    }
+
+    private ArrayList<Vehicle> findByProducer(){
+        String outputText = "Wählen Sie einen Hersteller aus.\n" + transformer.listToMenuTable(repository.getProducerNames());
+        int choiceAsInt = transformer.stringToInteger(userInterface.askForInput(outputText));
+        Producer producer = repository.getProducer(choiceAsInt);
+        return repository.getVehiclesByProducer(producer);
+    }
+
+    private ArrayList<Vehicle> findByClass(){
+        ArrayList<String> classes = new  ArrayList<>(Arrays.asList("Segelboot", "Motorboot", "U-Boot", "Luftkissenboot", "Bulldozer", "Motorrad", "Auto", "LKW", "Fahrrad", "Hubschrauber", "Jet", "Segelflugzeug"));
+        String table = "Wählen Sie einen Spielzeugtyp aus.\n" + transformer.listToMenuTable(classes);
+        int choice = transformer.stringToInteger(userInterface.askForInput(table), classes.size());
+        return repository.getVehiclesByClass(transformer.integerToClass(choice));
+    }
+
+    private ArrayList<Vehicle> findByColor(){
+        ArrayList<String> colors = new  ArrayList<>(Arrays.asList("rot", "grün", "blau", "schwarz", "weiß", "gelb", "grau"));
+        String table = "Wählen Sie eine Farbe aus.\n" + transformer.listToMenuTable(colors);
+        int choice = transformer.stringToInteger(userInterface.askForInput(table), colors.size());
+        Color color = transformer.stringToColor(colors.get(choice - 1));
+        return repository.getVehiclesByColor(color);
+    }
+
+    private ArrayList<Vehicle> findBySize(){
+        ArrayList<String> sizes = new  ArrayList<>(Arrays.asList("M", "L", "XL"));
+        String table = "Wählen Sie eine Größe aus.\n" + transformer.listToMenuTable(sizes);
+        int choice = transformer.stringToInteger(userInterface.askForInput(table), sizes.size());
+        Size size = transformer.stringToSize(sizes.get(choice - 1));
+        return repository.getVehiclesBySize(size);
+    }
+
+    private ArrayList<Vehicle> findBySystemOfDrive(){
+        ArrayList<String> sizes = new  ArrayList<>(Arrays.asList("Dieselmotor", "Benzinmotor", "Elektromotor", "Kerosinmotor", "Grüne Energie"));
+        String table = "Wählen Sie eine Antriebsart aus.\n" + transformer.listToMenuTable(sizes);
+        int choice = transformer.stringToInteger(userInterface.askForInput(table), sizes.size());
+        SystemOfDrive systemOfDrive = transformer.stringToSystemOfDrive(String.valueOf(choice));
+        return repository.getVehiclesBySystemOfDrive(systemOfDrive);
+    }
+
+    public void delete(){
+        String searchText = """
+                Welchen Artikel möchten Sie löschen?
+                Bitte geben Sie die Artikelnummer ein""";
+        Vehicle vehicle = findByExternalId(searchText);
+        jsonIO.writeVehicleData(vehicle, true);
+    }
+/*
+    public Vehicle edit() {
+        String searchText = """
+                Welchen Artikel möchten Sie bearbeiten?
+                Bitte geben Sie die Artikelnummer ein""";
+        Vehicle vehicle = findByExternalId(searchText);
+        ArrayList<String> options = new ArrayList<>(Arrays.asList("Spielzeugtyp", "Modellname", "Farbe", "Größe", "Hersteller", "Einkaufspreis", "Verkaufspreis", "Antriebsart", "Lieferdatum", "Anzahl der Räder"));
+        String header = vehicle.print() + "\nWas möchten Sie bearbeiten?";
+        String choiceAsString = userInterface.askForParameter(header + transformer.listToMenuTable(options));
+        transformer.stringToInteger(choiceAsString);
+        //return edited vehicle
+        return null;
+    }
+
+    private Vehicle editVehicle(){
+        return null;
+    }
+
+ */
+
+
 }

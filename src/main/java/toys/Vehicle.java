@@ -1,6 +1,10 @@
 package toys;
 
 import administration.*;
+import toy_features.Producer;
+import toy_features.Size;
+import toy_features.StorageLocation;
+import toy_features.SystemOfDrive;
 
 import java.awt.*;
 import java.util.Date;
@@ -35,17 +39,18 @@ public abstract class Vehicle {
 
     public String print() {
         Transformer transformer = new Transformer();
-        return "Das Spielzeug hat folgende Merkmale:" +
-                "\n Artikelnummer " + externalId +
-                "\n Bezeichnung " + name  +
-                "\n Farbe " + transformer.colorToString(color) +
-                "\n Größe " + size +
-                "\n Hersteller " + producer +
-                "\n Einkaufspreis " + String.format("%.2f", purchasePrice) +"EUR"+
-                "\n Verkaufspreis " + String.format("%.2f", salesPrice) +"EUR"+
-                "\n Antriebsart " + systemOfDrive +
-                "\n Lieferdatum " + deliveryDate +
-                "\n Lagerort " + storageLocation;
+        String format = "%-20s";
+        return "Das Spielzeug hat folgende Merkmale" +  //in hashmap??
+                String.format(format, "\n Artikelnummer: ") + externalId +
+                String.format(format, "\n Bezeichnung: ") + name  +
+                String.format(format, "\n Farbe: ") + transformer.colorToString(color) +
+                String.format(format, "\n Größe: ") +  size +
+                String.format(format, "\n Hersteller: ") + producer +
+                String.format(format, "\n Einkaufspreis: ") + String.format("%.2f", purchasePrice) +" EUR"+
+                String.format(format, "\n Verkaufspreis: ") + String.format("%.2f", salesPrice) +" EUR"+
+                String.format(format, "\n Antriebsart: ") + systemOfDrive +
+                String.format(format, "\n Lieferdatum: ") + transformer.dateToString(deliveryDate) +
+                String.format(format, "\n Lagerort: ") + storageLocation;
     }
 
     public String getName() {
@@ -127,7 +132,7 @@ public abstract class Vehicle {
     }
 
     protected void printMovement(String genericName, String typeOfMovement, String element){
-        System.out.println("Hallo ich bin "+genericName+" und ich "+typeOfMovement+element+"!");
+        System.out.println("Hallo ich bin ein "+genericName+" und ich "+typeOfMovement+element+"!");
     }
 
     public void printMovementOfVehicle(Vehicle vehicle){

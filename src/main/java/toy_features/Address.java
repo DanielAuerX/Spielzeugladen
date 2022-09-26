@@ -1,4 +1,4 @@
-package administration;
+package toy_features;
 
 public class Address {
     private String street;

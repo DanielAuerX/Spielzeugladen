@@ -7,6 +7,9 @@ import adapters.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import toy_features.Producer;
+import toy_features.Size;
+import toy_features.SystemOfDrive;
 import toys.Vehicle;
 
 public class Repository {
@@ -24,17 +27,13 @@ public class Repository {
         builder.registerTypeAdapter(Color.class, new ColorAdapter());
         Gson gson = builder.create();
         JsonIO jsonIO = new JsonIO();
-        String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\vehicle_data_test.json");
+        String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\inventory_data.json");
         ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
         HashMap<UUID, Vehicle> vehicleHashMap = new HashMap<>();
         for (Vehicle vehicle : vehicles){
             vehicleHashMap.put(vehicle.getInternalId(), vehicle);
         }
         return vehicleHashMap;
-    }
-
-    public void test(){
-        System.out.println(instantiateVehicles());
     }
 
     private Vehicle getVehicleByInternalId(UUID internalId){
@@ -61,6 +60,71 @@ public class Repository {
         return getVehicleByInternalId(internalID);
     }
 
+    public Vehicle getVehicleByName(String name){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (name.equalsIgnoreCase(vehicleHashMap.get(i).getName())){
+                return vehicleHashMap.get(i);
+            }
+        }
+        throw new InputMismatchException("Der Name konnte nicht gefunden werden!");
+    }
+
+    public ArrayList<Vehicle> getVehiclesByProducer(Producer producer){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Vehicle> vehiclesOfProducer = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (producer.getName().equals(vehicleHashMap.get(i).getProducer().getName())){
+                vehiclesOfProducer.add(vehicleHashMap.get(i));
+            }
+        }
+        return vehiclesOfProducer;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByClass(Class<?> type){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Vehicle> vehiclesOfType = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (type == vehicleHashMap.get(i).getClass()){
+                vehiclesOfType.add(vehicleHashMap.get(i));
+            }
+        }
+        return vehiclesOfType;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByColor(Color color){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Vehicle> vehiclesOfColor = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (color.equals(vehicleHashMap.get(i).getColor())){
+                vehiclesOfColor.add(vehicleHashMap.get(i));
+            }
+        }
+        return vehiclesOfColor;
+    }
+
+    public ArrayList<Vehicle> getVehiclesBySize(Size size){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Vehicle> vehiclesOfSize = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (size.equals(vehicleHashMap.get(i).getSize())){
+                vehiclesOfSize.add(vehicleHashMap.get(i));
+            }
+        }
+        return vehiclesOfSize;
+    }
+
+    public ArrayList<Vehicle> getVehiclesBySystemOfDrive(SystemOfDrive systemOfDrive){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Vehicle> vehiclesOfSystem = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (systemOfDrive.equals(vehicleHashMap.get(i).getSystemOfDrive())){
+                vehiclesOfSystem.add(vehicleHashMap.get(i));
+            }
+        }
+        return vehiclesOfSystem;
+    }
+
     public int getHighestExternalId(){
         HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
         ArrayList<Integer> list = new ArrayList<>();
@@ -70,34 +134,23 @@ public class Repository {
         return Collections.max(list);
     }
 
-    public Producer getProducer(String indexAsString){
-        int index = Integer.parseInt(indexAsString);
+    public Producer getProducer(int index) {
         ArrayList<Producer> producers = instantiateProducers();
-        JsonIO jsonIO = new JsonIO();
-        ToyAdministration toyAdministration = new ToyAdministration();
         Producer producer;
-        if(index==0){               //customer chose to create new Producer
-            producer = toyAdministration.createProducer();
-            jsonIO.addProducer(producer);
-        }
-        else if (index > 0 && index < producers.size()+1) {
+        if (index > 0 && index < producers.size() + 1) {
             producer = producers.get(index - 1);
-        }
-        else {
+        } else {
             throw new InputMismatchException("Falsche Eingabe!");
         }
         return producer;
     }
 
-    public String getProducerNames(){
+    public ArrayList<String> getProducerNames(){
         ArrayList<Producer> producers = instantiateProducers();
-        int counter = 1;
-        String producerNames = "Hersteller:\n0\t=\tneuen Hersteller anlegen\n";
+        ArrayList<String> producerNames = new ArrayList<>();
         for (Producer producer : producers) {
-            producerNames += counter+"\t=\t"+producer.getName()+"\n";
-            counter++;
+            producerNames.add(producer.getName());
         }
-        producerNames += "Bitte die entsprechende Zahl eingeben";
         return producerNames;
     }
 

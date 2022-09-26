@@ -1,8 +1,11 @@
 
 package adapters;
 
-import administration.*;
 import com.google.gson.*;
+import toy_features.Producer;
+import toy_features.Size;
+import toy_features.StorageLocation;
+import toy_features.SystemOfDrive;
 import toys.*;
 
 import java.awt.*;
@@ -55,7 +58,9 @@ public class VehicleAdapter implements JsonDeserializer<Vehicle>, JsonSerializer
             return new Hovercraft(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation);
         } else if (genericName.contains("Bulldozer")) {
             return new Bulldozer(internalId, externalId, name, color, size, producer, purchasePrice, salesPrice, systemOfDrive, deliveryDate, storageLocation);
-        } else {throw new JsonParseException("No class has been found for this element!");}
+        } else {
+            throw new JsonParseException("No class has been found for this element!");
+        }
     }
 
     @Override
@@ -73,14 +78,13 @@ public class VehicleAdapter implements JsonDeserializer<Vehicle>, JsonSerializer
         result.add("systemOfDrive", new JsonPrimitive(String.valueOf(vehicle.getSystemOfDrive())));
         result.add("deliveryDate", context.serialize(vehicle.getDeliveryDate()));
         result.add("storageLocation", new JsonPrimitive(String.valueOf(vehicle.getStorageLocation())));
-        if (vehicle instanceof Car || vehicle instanceof Bicycle || vehicle instanceof Motorcycle || vehicle instanceof Truck){
+        if (vehicle instanceof Car || vehicle instanceof Bicycle || vehicle instanceof Motorcycle || vehicle instanceof Truck) {
             result.add("numberOfWheels", new JsonPrimitive(getNumberOfWheels(vehicle)));
         }
-
         return result;
     }
 
-    private String getGenericName(Vehicle vehicle){
+    private String getGenericName(Vehicle vehicle) {
         return switch (vehicle.getClass().getSimpleName()) {
             case "Submarine" -> "ein U-Boot";
             case "Car" -> "ein Auto";
