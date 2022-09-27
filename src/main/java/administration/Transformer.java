@@ -1,6 +1,7 @@
 package administration;
 
 import toy_features.Size;
+import toy_features.StorageLocation;
 import toy_features.SystemOfDrive;
 import toys.Vehicle;
 
@@ -182,6 +183,15 @@ public class Transformer {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public StorageLocation integerToStorageLocation (int locationChoice){
+        return switch (locationChoice) {
+            case 1 -> StorageLocation.LOCATION1;
+            case 2 -> StorageLocation.LOCATION2;
+            case 3 -> StorageLocation.LOCATION3;
+            default -> throw new InputMismatchException("Dieser Lagerort konnte nicht gefunden werden!");
+        };
     }
 
 }

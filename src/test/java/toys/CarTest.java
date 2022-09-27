@@ -67,5 +67,6 @@ class CarTest {
         String actual = lines[lines.length-1];
 
         assertEquals(expected, actual);
+
     }
 }

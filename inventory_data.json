@@ -28,35 +28,6 @@
     "storageLocation": "LOCATION1"
   },
   {
-    "genericName": "Fahrrad",
-    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
-    "externalId": 1002,
-    "name": "BMX-POWER",
-    "color": {
-      "r": 0,
-      "g": 255,
-      "b": 0
-    },
-    "size": "L",
-    "producer": {
-      "name": "Plastic World",
-      "address": {
-        "street": "Steinstraße",
-        "houseNumber": "110",
-        "zipCode": 13359,
-        "city": "Berlin"
-      },
-      "phoneNumber": "+490518288248",
-      "email": "info@plastic.com"
-    },
-    "purchasePrice": 8.25,
-    "salesPrice": 19.99,
-    "systemOfDrive": "GRUENE_ENERGIE",
-    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
-    "storageLocation": "LOCATION1",
-    "numberOfWheels": 2
-  },
-  {
     "genericName": "LKW",
     "internalId": "9c318c61-ea0e-4a17-b913-c8ebf2d152c4",
     "externalId": 1003,
@@ -318,125 +289,9 @@
     "externalId": 1002,
     "name": "BMX-POWER",
     "color": {
-      "r": 0,
-      "g": 255,
-      "b": 0
-    },
-    "size": "M",
-    "producer": {
-      "name": "Plastic World",
-      "address": {
-        "street": "Steinstraße",
-        "houseNumber": "110",
-        "zipCode": 13359,
-        "city": "Berlin"
-      },
-      "phoneNumber": "+490518288248",
-      "email": "info@plastic.com"
-    },
-    "purchasePrice": 8.25,
-    "salesPrice": 19.99,
-    "systemOfDrive": "GRUENE_ENERGIE",
-    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
-    "storageLocation": "LOCATION1",
-    "numberOfWheels": 2
-  },
-  {
-    "genericName": "Fahrrad",
-    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
-    "externalId": 1002,
-    "name": "BMX-POWER",
-    "color": {
-      "r": 0,
-      "g": 255,
-      "b": 0
-    },
-    "size": "M",
-    "producer": {
-      "name": "Toys4Us",
-      "address": {
-        "street": "Muellerweg",
-        "houseNumber": "7a",
-        "zipCode": 13357,
-        "city": "Berlin"
-      },
-      "phoneNumber": "022488248",
-      "email": "production@t4us.de"
-    },
-    "purchasePrice": 8.25,
-    "salesPrice": 19.99,
-    "systemOfDrive": "GRUENE_ENERGIE",
-    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
-    "storageLocation": "LOCATION1",
-    "numberOfWheels": 2
-  },
-  {
-    "genericName": "Fahrrad",
-    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
-    "externalId": 1002,
-    "name": "BMX-POWER",
-    "color": {
       "r": 255,
       "g": 255,
       "b": 0
-    },
-    "size": "M",
-    "producer": {
-      "name": "Toys4Us",
-      "address": {
-        "street": "Muellerweg",
-        "houseNumber": "7a",
-        "zipCode": 13357,
-        "city": "Berlin"
-      },
-      "phoneNumber": "022488248",
-      "email": "production@t4us.de"
-    },
-    "purchasePrice": 8.25,
-    "salesPrice": 19.99,
-    "systemOfDrive": "GRUENE_ENERGIE",
-    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
-    "storageLocation": "LOCATION1",
-    "numberOfWheels": 2
-  },
-  {
-    "genericName": "Fahrrad",
-    "internalId": "56c78b25-de6c-478b-bf8e-e4e6d5a0c712",
-    "externalId": 1002,
-    "name": "BMX-POWER",
-    "color": {
-      "r": 0,
-      "g": 255,
-      "b": 0
-    },
-    "size": "M",
-    "producer": {
-      "name": "Toys4Us",
-      "address": {
-        "street": "Muellerweg",
-        "houseNumber": "7a",
-        "zipCode": 13357,
-        "city": "Berlin"
-      },
-      "phoneNumber": "022488248",
-      "email": "production@t4us.de"
-    },
-    "purchasePrice": 8.25,
-    "salesPrice": 19.99,
-    "systemOfDrive": "GRUENE_ENERGIE",
-    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
-    "storageLocation": "LOCATION1",
-    "numberOfWheels": 2
-  },
-  {
-    "genericName": "LKW",
-    "internalId": "9c318c61-ea0e-4a17-b913-c8ebf2d152c4",
-    "externalId": 1003,
-    "name": "BrumBrum",
-    "color": {
-      "r": 0,
-      "g": 0,
-      "b": 255
     },
     "size": "L",
     "producer": {
@@ -450,11 +305,40 @@
       "phoneNumber": "+490518288248",
       "email": "info@plastic.com"
     },
-    "purchasePrice": 5.2,
-    "salesPrice": 9.99,
-    "systemOfDrive": "BENZINMOTOR",
-    "deliveryDate": "Sep 20, 2021, 12:00:00 AM",
+    "purchasePrice": 8.25,
+    "salesPrice": 19.99,
+    "systemOfDrive": "GRUENE_ENERGIE",
+    "deliveryDate": "Aug 12, 2022, 12:00:00 AM",
     "storageLocation": "LOCATION1",
-    "numberOfWheels": 4
+    "numberOfWheels": 2
+  },
+  {
+    "genericName": "Fahrrad",
+    "internalId": "3c14ee0c-3f08-4d15-a784-94a7f0b53db3",
+    "externalId": 1012,
+    "name": "E-Bike 100c",
+    "color": {
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    "size": "M",
+    "producer": {
+      "name": "Toys4Us",
+      "address": {
+        "street": "Muellerweg",
+        "houseNumber": "7a",
+        "zipCode": 13357,
+        "city": "Berlin"
+      },
+      "phoneNumber": "022488248",
+      "email": "production@t4us.de"
+    },
+    "purchasePrice": 10.0,
+    "salesPrice": 12.99,
+    "systemOfDrive": "ELEKTROMOTOR",
+    "deliveryDate": "Aug 1, 2022, 12:00:00 AM",
+    "storageLocation": "LOCATION1",
+    "numberOfWheels": 2
   }
 ]

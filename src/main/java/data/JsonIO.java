@@ -1,4 +1,4 @@
-package administration;
+package data;
 
 import adapters.ColorAdapter;
 import adapters.VehicleAdapter;
@@ -57,6 +57,7 @@ public class JsonIO {
             vehicles.removeIf(i -> i.getInternalId().equals(vehicle.getInternalId()));
         }
         else {
+            vehicles.removeIf(i -> i.getInternalId().equals(vehicle.getInternalId()));
             vehicles.add(vehicle);
         }
         String jsonText = gson.toJson(vehicles, new TypeToken<ArrayList<Vehicle>>() {}.getType());

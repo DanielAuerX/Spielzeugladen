@@ -1,4 +1,4 @@
-package administration;
+package data;
 
 import java.awt.*;
 import java.util.*;
@@ -7,8 +7,10 @@ import adapters.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import data.JsonIO;
 import toy_features.Producer;
 import toy_features.Size;
+import toy_features.StorageLocation;
 import toy_features.SystemOfDrive;
 import toys.Vehicle;
 
@@ -123,6 +125,17 @@ public class Repository {
             }
         }
         return vehiclesOfSystem;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByStorageLocation(StorageLocation location){
+        HashMap<UUID, Vehicle> vehicleHashMap = instantiateVehicles();
+        ArrayList<Vehicle> vehiclesOfLocation = new ArrayList<>();
+        for (UUID i: vehicleHashMap.keySet()) {
+            if (location.equals(vehicleHashMap.get(i).getStorageLocation())){
+                vehiclesOfLocation.add(vehicleHashMap.get(i));
+            }
+        }
+        return vehiclesOfLocation;
     }
 
     public int getHighestExternalId(){

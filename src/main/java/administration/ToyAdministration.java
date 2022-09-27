@@ -1,6 +1,7 @@
 package administration;
 
-import interfaces.LandVehicle;
+import data.JsonIO;
+import data.Repository;
 import interfaces.WheeledVehicle;
 import toy_features.*;
 import toys.*;
@@ -26,6 +27,21 @@ public class ToyAdministration {
         jsonIO.writeVehicleData(editedVehicle, false);
     }
 
+    public String find(){
+        String header = "Wählen sie eine Kategorie nach der Sie suchen möchten.\n";
+        ArrayList<String> menuOptions = new ArrayList<>(Arrays.asList("Artikelnummer", "Spielzeugtyp", "Modellname", "Farbe", "Größe", "Hersteller", "Antriebsart"));
+        String input = userInterface.askForInput(header + transformer.listToMenuTable(menuOptions));
+        int categoryChoice = transformer.stringToInteger(input, menuOptions.size());;
+        return startSearch(categoryChoice);
+    }
+
+    public void delete(){
+        String searchText = """
+                Welchen Artikel möchten Sie löschen?
+                Bitte geben Sie die Artikelnummer ein""";
+        Vehicle vehicle = findByExternalId(searchText);
+        jsonIO.writeVehicleData(vehicle, true);
+    }
 
     private Vehicle createVehicle() {
         System.out.println("Bitte alle geforderten Informationen eingeben.");
@@ -134,14 +150,6 @@ public class ToyAdministration {
         return new Producer(name, address, telephoneNumber, email);
     }
 
-    public String find(){
-        String header = "Wählen sie eine Kategorie nach der Sie suchen möchten.\n";
-        ArrayList<String> menuOptions = new ArrayList<>(Arrays.asList("Artikelnummer", "Spielzeugtyp", "Modellname", "Farbe", "Größe", "Hersteller", "Antriebsart"));
-        String input = userInterface.askForInput(header + transformer.listToMenuTable(menuOptions));
-        int categoryChoice = transformer.stringToInteger(input, menuOptions.size());;
-        return startSearch(categoryChoice);
-    }
-
     private String startSearch(int categoryChoice){
         Vehicle vehicle;
         switch (categoryChoice){
@@ -214,15 +222,6 @@ public class ToyAdministration {
         SystemOfDrive systemOfDrive = transformer.stringToSystemOfDrive(String.valueOf(choice));
         return repository.getVehiclesBySystemOfDrive(systemOfDrive);
     }
-
-    public void delete(){
-        String searchText = """
-                Welchen Artikel möchten Sie löschen?
-                Bitte geben Sie die Artikelnummer ein""";
-        Vehicle vehicle = findByExternalId(searchText);
-        jsonIO.writeVehicleData(vehicle, true);
-    }
-
 
     private void editFeature(Vehicle vehicle, int featureNumber) {
         switch (featureNumber) {
