@@ -12,11 +12,13 @@ public class UserInterface {
                 Welches Programm möchten Sie starten?
                 1   =   Spielzeug-Administration
                 2   =   Lagerort-Administration
+                3   =   Programm beenden
                 Bitte die entsprechende Zahl eingeben""";
-        int input = transformer.stringToInteger(askForInput(startText), 2);
+        int input = transformer.stringToInteger(getUserInput(startText), 3);
         switch (input) {
             case 1 -> runToyAdministration();
             case 2 -> runStorageAdministration();
+            case 3 -> System.out.println("Auf Wiedersehen!");
         }
     }
 
@@ -27,7 +29,7 @@ public class UserInterface {
         ArrayList<String> options = new ArrayList<>(Arrays.asList("Hinzufügen", "Bearbeiten", "Löschen", "Suchen", "Programm beenden"));
         String header = "\u001B[1m" + "***** Spielzeug-Administration *****\n" + "\033[0m" + "Was möchten Sie tun?\n";
         while (!quitProgram) {
-            String choiceAsString = askForInput(header + transformer.listToMenuTable(options));
+            String choiceAsString = getUserInput(header + transformer.listToMenuTable(options));
             int choice = transformer.stringToInteger(choiceAsString, options.size());
             switch (choice) {
                 case 1 -> {
@@ -58,14 +60,14 @@ public class UserInterface {
         var options = new ArrayList<>(Arrays.asList("Artikel anzeigen", "Lagerort ändern", "Lieferort ändern", "Programm beenden"));
         String header = "\u001B[1m" + "***** Lagerort-Administration *****\n" + "\033[0m" + "Was möchten Sie tun?\n";
         while (!quitProgram) {
-            String choiceAsString = askForInput(header + transformer.listToMenuTable(options));
+            String choiceAsString = getUserInput(header + transformer.listToMenuTable(options));
             int choice = transformer.stringToInteger(choiceAsString, options.size());
             switch (choice) {
                 case 1 -> {
                     System.out.println(storageAdministration.find());
                 }
-                case 2 -> {}
-                case 3 -> {}
+                case 2 -> {}  //change storage location
+                case 3 -> {}  //default storage location
                 case 4 -> {
                     System.out.println("Auf Wiedersehen!");
                     quitProgram = true;
@@ -74,7 +76,7 @@ public class UserInterface {
         }
     }
 
-    public String askForInput(String outputText) {
+    public String getUserInput(String outputText) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(outputText + ": ");
         return scanner.nextLine();

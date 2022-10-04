@@ -7,7 +7,6 @@ import adapters.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import data.JsonIO;
 import toy_features.Producer;
 import toy_features.Size;
 import toy_features.StorageLocation;
@@ -15,12 +14,22 @@ import toy_features.SystemOfDrive;
 import toys.Vehicle;
 
 public class Repository {
+
+    Configuration config = getConfig();
+    JsonIO jsonIO = new JsonIO();
+
+    public Configuration getConfig() {
+        JsonIO jsonIO = new JsonIO();
+        Gson gson = new Gson();
+        String configPath = "R:\\Java\\Spielzeugladen\\config.json";
+        String jsonString = jsonIO.readJson(configPath);
+        return gson.fromJson(jsonString, new TypeToken<Configuration>() {}.getType());
+    }
+
     private ArrayList<Producer> instantiateProducers(){
         Gson gson = new Gson();
-        JsonIO jsonIO = new JsonIO();
-        String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\producer_data.json");
-        ArrayList<Producer> producers = gson.fromJson(jsonString, new TypeToken<ArrayList<Producer>>() {}.getType());
-        return producers;
+        String jsonString = jsonIO.readJson(config.getProducerPath());
+        return gson.fromJson(jsonString, new TypeToken<ArrayList<Producer>>() {}.getType());
     }
 
     private HashMap<UUID, Vehicle> instantiateVehicles(){
@@ -28,8 +37,7 @@ public class Repository {
         builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
         builder.registerTypeAdapter(Color.class, new ColorAdapter());
         Gson gson = builder.create();
-        JsonIO jsonIO = new JsonIO();
-        String jsonString = jsonIO.readJson("R:\\Java\\Spielzeugladen\\inventory_data.json");
+        String jsonString = jsonIO.readJson(config.getInventoryPath());
         ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
         HashMap<UUID, Vehicle> vehicleHashMap = new HashMap<>();
         for (Vehicle vehicle : vehicles){

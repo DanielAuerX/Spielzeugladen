@@ -65,8 +65,6 @@ class CarTest {
 
         String[] lines = outputStream.toString().split(System.lineSeparator());
         String actual = lines[lines.length-1];
-
         assertEquals(expected, actual);
-
     }
 }

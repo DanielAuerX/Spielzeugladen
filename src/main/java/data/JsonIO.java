@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
 
 public class JsonIO {
 
@@ -28,45 +31,63 @@ public class JsonIO {
         return jsonString;
     }
 
-    public void addProducer(Producer producer){
-        String filepath = "R:\\Java\\Spielzeugladen\\producer_data.json";
+    public void addProducer(Producer producer, String filepath) {
         Gson gson = new Gson();
         String jsonAsString = readJson(filepath);
-        ArrayList<Producer> allProducers = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Producer>>() {}.getType());
-        allProducers.add(producer);
-        String jsonText = gson.toJson(allProducers, new TypeToken<ArrayList<Producer>>() {}.getType());
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-            writer.write(jsonText);
-            writer.close();
+        ArrayList<Producer> allProducers;
+        if (!jsonAsString.equals("")) {
+            allProducers = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Producer>>() {
+            }.getType());
+            allProducers.add(producer);
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        else {
+            allProducers = new ArrayList<>(Collections.singletonList(producer));
         }
+        String jsonText = gson.toJson(allProducers, new TypeToken<ArrayList<Producer>>() {
+        }.getType());
+        writeToJson(filepath, jsonText);
     }
 
-    public void writeVehicleData(Vehicle vehicle, boolean shouldDelete){
-        String filepath = "R:\\Java\\Spielzeugladen\\inventory_data.json";
+    public void writeVehicleToData(Vehicle vehicle, String filepath) {
         GsonBuilder builder = new GsonBuilder();                            //Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
         builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
         builder.registerTypeAdapter(Color.class, new ColorAdapter());
         Gson gson = builder.create();
-        String jsonString = readJson(filepath);
-        ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
-        if (shouldDelete){
-            vehicles.removeIf(i -> i.getInternalId().equals(vehicle.getInternalId()));
-        }
-        else {
+        String jsonAsString = readJson(filepath);
+        ArrayList<Vehicle> vehicles;
+        if (!jsonAsString.equals("")) { //if file contains vehicles -> check if vehicle already exits
+            vehicles = gson.fromJson(jsonAsString, new TypeToken<ArrayList<Vehicle>>() {}.getType());
             vehicles.removeIf(i -> i.getInternalId().equals(vehicle.getInternalId()));
             vehicles.add(vehicle);
         }
+        else {  //if file is empty
+            vehicles = new ArrayList<>(Collections.singletonList(vehicle));
+        }
         String jsonText = gson.toJson(vehicles, new TypeToken<ArrayList<Vehicle>>() {}.getType());
+        writeToJson(filepath, jsonText);
+    }
+
+
+    public void deleteVehicleFromData(Vehicle vehicle, String filepath) {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Vehicle.class, new VehicleAdapter());
+        builder.registerTypeAdapter(Color.class, new ColorAdapter());
+        Gson gson = builder.create();
+        String jsonString = readJson(filepath);
+        ArrayList<Vehicle> vehicles = gson.fromJson(jsonString, new TypeToken<ArrayList<Vehicle>>() {
+        }.getType());
+        vehicles.removeIf(i -> i.getInternalId().equals(vehicle.getInternalId()));
+        String jsonText = gson.toJson(vehicles, new TypeToken<ArrayList<Vehicle>>() {
+        }.getType());
+        writeToJson(filepath, jsonText);
+    }
+
+    private static void writeToJson(String filepath, String jsonText) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
             writer.write(jsonText);
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

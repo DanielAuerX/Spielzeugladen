@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import static administration.ToyAdministration.BOLD;
+import static administration.ToyAdministration.RESET;
+
 public class StorageAdministration {
     // get toys by storage location
     // change storage location of a toy
@@ -17,9 +20,10 @@ public class StorageAdministration {
     private final Transformer transformer = new Transformer();
     private final UserInterface userInterface = new UserInterface();
     private final Repository repository = new Repository();
+    private final Finder finder = new Finder();
 
     public String find (){
-        ArrayList<Vehicle> vehicles = findByLocation();
+        ArrayList<Vehicle> vehicles = finder.findByLocation();
         String resultList = "";
         if (vehicles.isEmpty()) {
             resultList = "Es sind derzeit keine Artikel mit diesem Merkmal auf Lager.";
@@ -35,12 +39,9 @@ public class StorageAdministration {
         return resultList;
     }
 
-    private ArrayList<Vehicle> findByLocation (){
-        ArrayList<String> locations = new  ArrayList<>(Arrays.asList("Lagerhalle 1", "Lagerhalle 2", "Lagerhalle 3"));
-        String table = "Wählen Sie einen Lagerort aus.\n" + transformer.listToMenuTable(locations);
-        int choice = transformer.stringToInteger(userInterface.askForInput(table), locations.size());
-        StorageLocation location = transformer.integerToStorageLocation(choice);
-        return repository.getVehiclesByStorageLocation(location);
+    private void changeLocation () {
+        String searchText = BOLD + "Welchen Artikel möchten Sie bearbeiten?\n" + RESET + "Bitte geben Sie die Artikelnummer ein";
+        Vehicle vehicle = finder.findByExternalId(searchText);
     }
 
 

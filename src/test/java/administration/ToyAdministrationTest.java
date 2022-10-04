@@ -2,6 +2,7 @@ package administration;
 
 import data.JsonIO;
 import data.Repository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import toy_features.*;
 import toys.Sailboat;
@@ -16,7 +17,6 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ToyAdministrationTest {
-
 
     JsonIO jsonIO = new JsonIO();
     ToyAdministration toyAdministration = new ToyAdministration();
@@ -44,10 +44,11 @@ class ToyAdministrationTest {
     }
 
     @Test
+    @Disabled("no second input")
     void find_ShouldReturnTestVehiclesData() {
         String filepath = "R:\\Java\\Spielzeugladen\\inventory_data.json";
         String dataBeforeTest = jsonIO.readJson(filepath);
-        jsonIO.writeVehicleData(testVehicle, false);
+        jsonIO.writeVehicleToData(testVehicle, filepath);
         String expected = "Das Spielzeug hat folgende Merkmale...";
         String userInput = "1\n" + "\n123456789";
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
@@ -60,10 +61,11 @@ class ToyAdministrationTest {
     }
 
     @Test
+    @Disabled("TEST FILE")
     void delete_ShouldDeleteTestVehicle() {
         String filepath = "R:\\Java\\Spielzeugladen\\inventory_data.json";
         String dataBeforeTest = jsonIO.readJson(filepath);
-        jsonIO.writeVehicleData(testVehicle, false);
+        jsonIO.writeVehicleToData(testVehicle, filepath);
         String userInput = "123456789";
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
 
