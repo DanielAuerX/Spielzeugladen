@@ -18,17 +18,6 @@ public class Configuration {
         return inventoryPath;
     }
 
-    /*
-    public static String producerPath;
-    public static String inventoryPath;
-
-    public Configuration(String producerPath, String inventoryPath) {
-        Configuration.producerPath = producerPath;
-        Configuration.inventoryPath = inventoryPath;
-    }
-
-     */
-
 
 
 }

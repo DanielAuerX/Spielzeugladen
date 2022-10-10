@@ -10,6 +10,8 @@ import toys.Vehicle;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Finder {
     private final UserInterface userInterface = new UserInterface();
@@ -66,9 +68,9 @@ public class Finder {
     }
 
     public ArrayList<Vehicle> findByLocation() {
-        ArrayList<String> locations = new ArrayList<>(Arrays.asList("Lagerhalle 1", "Lagerhalle 2", "Lagerhalle 3"));
-        String table = "Wählen Sie einen Lagerort aus.\n" + transformer.listToMenuTable(locations);
-        int choice = transformer.stringToInteger(userInterface.getUserInput(table), locations.size());
+        List<String> locationNamesList = Arrays.stream(StorageLocation.values()).map(StorageLocation::getLocationName).toList();
+        String table = "Wählen Sie einen Lagerort aus.\n" + transformer.listToMenuTable(new ArrayList<>(locationNamesList));
+        int choice = transformer.stringToInteger(userInterface.getUserInput(table), locationNamesList.size());
         StorageLocation location = transformer.integerToStorageLocation(choice);
         return repository.getVehiclesByStorageLocation(location);
     }

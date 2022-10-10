@@ -63,10 +63,8 @@ public class UserInterface {
             String choiceAsString = getUserInput(header + transformer.listToMenuTable(options));
             int choice = transformer.stringToInteger(choiceAsString, options.size());
             switch (choice) {
-                case 1 -> {
-                    System.out.println(storageAdministration.find());
-                }
-                case 2 -> {}  //change storage location
+                case 1 -> System.out.println(storageAdministration.find());
+                case 2 -> storageAdministration.changeLocation();
                 case 3 -> {}  //default storage location
                 case 4 -> {
                     System.out.println("Auf Wiedersehen!");
@@ -78,6 +76,11 @@ public class UserInterface {
 
     public String getUserInput(String outputText) {
         Scanner scanner = new Scanner(System.in);
+        System.out.print(outputText + ": ");
+        return scanner.nextLine();
+    }
+
+    public String getUserInputTest(String outputText, Scanner scanner) {
         System.out.print(outputText + ": ");
         return scanner.nextLine();
     }

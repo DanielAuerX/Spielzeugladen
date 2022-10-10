@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+
 class UserInterfaceTest {
     UserInterface userInterface = new UserInterface();
 
@@ -91,7 +92,7 @@ class UserInterfaceTest {
     @Test
     void askForInput_ShouldReturnMockedInput() {
         when(scanner.nextLine()).thenReturn("hellow");
-        String userInput = userInterface.getUserInput("Enter your input");
+        String userInput = userInterface.getUserInputTest("Enter your input", scanner);
         assertEquals("hellow", userInput);
     }
 }
