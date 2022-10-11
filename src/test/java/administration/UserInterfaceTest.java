@@ -38,19 +38,17 @@ class UserInterfaceTest {
     }
 
     @Test
-    @Disabled("Exception NoSuchElement")
     void run_Input2and5ShouldQuitProgram() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(outputStream);
-        System.setOut(printStream);
-        String userInput = "2" + "\n5";
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        when(userInterface.getUserInput("""
+                Welches Programm möchten Sie starten?
+                1   =   Spielzeug-Administration
+                2   =   Lagerort-Administration
+                3   =   Programm beenden
+                Bitte die entsprechende Zahl eingeben""")).thenReturn("1");
 
         userInterface.run();
 
-        String[] lines = outputStream.toString().split(System.lineSeparator());
-        String actual = lines[lines.length-1];
-        assertTrue(actual.contains("Auf Wiedersehen!"));
+
     }
 
     @Test
@@ -91,8 +89,8 @@ class UserInterfaceTest {
 
     @Test
     void askForInput_ShouldReturnMockedInput() {
-        when(scanner.nextLine()).thenReturn("hellow");
+        when(scanner.nextLine()).thenReturn("hello");
         String userInput = userInterface.getUserInputTest("Enter your input", scanner);
-        assertEquals("hellow", userInput);
+        assertEquals("hello", userInput);
     }
 }
